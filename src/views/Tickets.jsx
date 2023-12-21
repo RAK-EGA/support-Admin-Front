@@ -3,6 +3,7 @@ import {
 } from "react-router-dom"
 
 import "../styles/tickets.css"
+import Ticket from "../components/Ticket";
 
 
 
@@ -41,8 +42,48 @@ export default function Tickets() {
                 </Form>
 
                 {/* add filtering */}
+                {/* maybe a button that gives choices and then */}
 
             </div>
+
+            {/* make this a component */}
+            <div className="display--elements">
+                {/* map to tickets here with a component  */}
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                <Ticket />
+                
+
+
+            </div>
+
+
+
 
         </>
 

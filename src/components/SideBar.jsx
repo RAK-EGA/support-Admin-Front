@@ -105,7 +105,7 @@ export default function NavBar() {
                     </label>
                     <Toggle
                         name="toggle-1"
-                        className="test"
+                        className="custom"
                         onChange={e => console.log("onToggle", e.target.checked)}
                     />
                 </div>

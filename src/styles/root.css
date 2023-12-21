@@ -2,6 +2,8 @@
 .nav--bar {
     display: flex;
     flex-direction: row;
+    min-width: 1209px;
+    min-height: 80px;
 
 }
 
@@ -22,9 +24,11 @@
 
 /* SideBar */
 #sidebar {
-    height: inherit;
+    height: 100%;
     border-right: 2px #9D845C;
     margin-right: 10px;
+    position: sticky;
+
 }
 
 .side--bar {
@@ -35,6 +39,7 @@
     /* justify-content: center; */
     width: 25%;
     min-width: 229px;
+    min-height: 740px;
     height: 100%;
     margin-top: 10px;
     background-color: #ffffff;
@@ -136,7 +141,12 @@ nav>ul>li>a>span {
    
 } */
 
-.test.react-toggle--checked .react-toggle-track {}
+.custom.react-toggle--checked .react-toggle-track {
+    /* change color for dark */
+    /* Toogle */
+    /* background-color: #E9F5FE; */
+
+}
 
 .toggle--lable {
     margin-right: auto;
@@ -181,6 +191,8 @@ button:active {
     height: 100%;
     background-color: #ffffff;
     margin-top: 10px;
+    min-height: 740px;
+    min-width: 980px;
 
 }
 

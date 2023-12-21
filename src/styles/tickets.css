@@ -3,11 +3,12 @@
 
     /* position: absolute;
     width: 281px;
-    height: 60px;
     left: 332px;
     top: 125px; */
 
     /* font-family: 'Poppins'; */
+    height: 60px;
+
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
@@ -21,7 +22,12 @@
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 
     display: flex;
+    align-items: center;
 
+}
+
+.tickets--header>span {
+    margin-right: auto;
 }
 
 /* Rectangle 48 */
@@ -31,12 +37,14 @@
 
     box-sizing: border-box;
 
-    position: absolute;
+    /* position: absolute;
+ 
+    left: 695px;
+    top: 119px; */
+
     width: 392px;
     height: 40px;
-    left: 695px;
-    top: 119px;
-
+    margin-right: auto;
     /* background: #FFFFFF; */
     /* beige */
     /* border: 1px solid #9D855C;
@@ -57,4 +65,126 @@
     background-position: 0.625rem 0.75rem;
     background-size: 1rem;
     position: relative;
+}
+
+/* container class for my details may copy */
+
+.display--elements {
+
+    height: 90%;
+    background-color: #F3F1EA;
+    margin-top: 14px;
+    margin-bottom: 64px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    min-width: 680px;
+
+
+}
+
+.ticket--container {
+    /* User */
+
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+
+    /* Rectangle 67 */
+    /* 
+    background: #E6E6F2; */
+    border-bottom: 2px solid #D9D5EC;
+    padding: 0 30px;
+
+}
+
+.ticket--info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ticket--id {
+    margin-bottom: 4px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    /* Fonts/Primary */
+    color: #25213B;
+
+}
+
+.ticket--category {
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    letter-spacing: 0.05em;
+
+    /* Fonts/Primary Variant */
+    color: #6E6893;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.ticket--date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+
+    /* Fonts/Primary */
+    color: #25213B;
+
+
+}
+
+.ticket--status {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.status--holder {
+    /* Rectangle 67 */
+    border-radius: 10px;
+    width: 70px;
+    padding: 3px;
+
+    /* Status */
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+
+
+}
+
+.green {
+
+    background-color: #007F00;
+    color: #007F00;
+}
+
+.red {
+    background-color: #FFE0E0;
+    color: #D30000;
+}
+
+.blue {
+    background-color: #E6E6F2;
+    color: #4A4AFF;
+
 }

@@ -7,7 +7,7 @@ import {
 
 import Root from "./views/Root";
 import Tickets from "./views/Tickets";
-
+import Index from "./views/Index";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
@@ -16,7 +16,7 @@ const router = createBrowserRouter(
       errorElement={<div>Oh no baby</div>}
     >
       <Route errorElement={<div>Oh no baby</div>}>
-        <Route index element={<div>AA</div>} />
+        <Route index element={<Index/>} />
         <Route
           path="tickets/"
           element={<Tickets/>}
