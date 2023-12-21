@@ -1,0 +1,207 @@
+/* NavBar */
+.nav--bar {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.img--logo {
+    margin-left: 15px;
+    margin-top: 10px;
+    height: 70px;
+    margin-right: auto;
+}
+
+.img--profile {
+    height: 40px;
+    margin-top: 29px;
+    margin-right: 44px;
+}
+
+/* end NavBar */
+
+/* SideBar */
+#sidebar {
+    height: inherit;
+    border-right: 2px #9D845C;
+    margin-right: 10px;
+}
+
+.side--bar {
+    display: flex;
+    flex-direction: column;
+
+    /* align-items: center; */
+    /* justify-content: center; */
+    width: 25%;
+    min-width: 229px;
+    height: 100%;
+    margin-top: 10px;
+    background-color: #ffffff;
+}
+
+nav {
+    /* margin-top: 24px; */
+    padding: 24px;
+}
+
+nav>ul {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+nav>ul>li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    /* align-items: center; */
+    /* display: flex;
+    align-items: center; */
+}
+
+nav>ul>li>a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+
+nav>ul>li>img {
+    height: 44px;
+    width: 44px;
+}
+
+nav>ul>li>a>span {
+    /* Dashboard */
+
+
+    /* font-family: 'Poppins'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14.6358px;
+    line-height: 22px;
+    /* identical to box height, or 150% */
+    letter-spacing: 0.01em;
+
+    /* beige */
+    color: #723A28;
+
+
+    /* Inside auto layout */
+
+
+    margin-left: 10px;
+}
+
+/* side bottom */
+
+
+.side--bottom {
+    margin-top: auto;
+    margin-left: 22px;
+    margin-right: 22px;
+    margin-bottom: 29px;
+}
+
+.dark--mode {
+    /* Dashboard */
+
+
+    /* font-family: 'Poppins'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14.6358px;
+    line-height: 22px;
+    /* identical to box height, or 150% */
+    letter-spacing: 0.01em;
+
+    /* beige */
+    color: #9D845C;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    /* justify-content: center; */
+    /* text-align: center; */
+
+
+
+}
+
+
+/* toggle */
+/* * {
+   
+} */
+
+.test.react-toggle--checked .react-toggle-track {}
+
+.toggle--lable {
+    margin-right: auto;
+}
+
+/* toggle end */
+.logout--button {
+    margin-top: 22px;
+    width: 100%;
+    display: flex;
+    background-color: #9D845C;
+    border-color: #9D845C;
+    border-radius: 5px;
+    padding: 9px;
+    align-items: center;
+    /* Dashboard */
+
+    /* font-family: 'Poppins';
+    font-style: normal; */
+    font-weight: 600;
+    font-size: 14.6358px;
+    line-height: 22px;
+    /* identical to box height, or 150% */
+    letter-spacing: 0.01em;
+
+    color: #FFFFFF
+}
+
+button:hover {
+    box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.6), 0 1px 2px hsla(0, 0%, 0%, 0.2);
+}
+
+button:active {
+    box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.4);
+    transform: translateY(1px);
+}
+
+#detail {
+    flex: 1;
+    padding: 2rem 4rem;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    margin-top: 10px;
+
+}
+
+#detail.loading {
+    opacity: 0.25;
+    transition: opacity 200ms;
+    transition-delay: 200ms;
+}
+
+#content {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+#page--layout {
+    height: 100%;
+    width: 100%;
+}
+
+
+/*end side bottom   */
+
+/* end SideBar */
