@@ -43,3 +43,25 @@ body {
   display: flex;
   flex-direction: column;
 } */
+
+
+.green {
+
+  background-color: #CDFFCD;
+  color: #007F00;
+}
+
+.red {
+  background-color: #FFE0E0;
+  color: #D30000;
+}
+
+.blue {
+  background-color: #E6E6F2;
+  color: #4A4AFF;
+
+}
+.gray{
+  background-color: #d3d3d3;
+  color: #767676;
+}

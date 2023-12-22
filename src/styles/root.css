@@ -69,9 +69,17 @@ nav>ul>li>a {
     display: flex;
     align-items: center;
     text-decoration: none;
+    width: 100%;
 
 }
 
+nav>ul>li>a.active {
+background-color: #F3F1EA;
+
+}
+nav>ul>li>a.pending {
+    background-color: #f3f1ea6e;
+}
 
 nav>ul>li>img {
     height: 44px;
@@ -217,3 +225,205 @@ button:active {
 /*end side bottom   */
 
 /* end SideBar */
+
+/* container class for my details may copy */
+
+.display--elements {
+
+    height: 90%;
+    background-color: #F3F1EA;
+    margin-top: 14px;
+    margin-bottom: 64px;
+    overflow-y: scroll;
+    /* overflow-x: scroll; */
+    min-width: 680px;
+
+
+}
+
+.item--container {
+    /* User */
+
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+
+    /* Rectangle 67 */
+    /* 
+    background: #E6E6F2; */
+    border-bottom: 2px solid #D9D5EC;
+    padding: 0 30px;
+
+}
+
+.item--info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item--id {
+    margin-bottom: 4px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    /* Fonts/Primary */
+    color: #25213B;
+
+}
+
+.item--category {
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    letter-spacing: 0.05em;
+
+    /* Fonts/Primary Variant */
+    color: #6E6893;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.item--date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+
+    /* Fonts/Primary */
+    color: #25213B;
+
+
+}
+
+.item--status {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.status--holder {
+    /* Rectangle 67 */
+    position: relative;
+    border-radius: 10px;
+    width: 100px;
+    padding: 5px;
+
+    /* Status */
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+}
+.status--holder>svg{
+    position: relative;
+    left: 0.5rem;
+    margin-right: 15px;
+}
+
+.items--header {
+    /* TICKET */
+
+    /* position: absolute;
+    width: 281px;
+    left: 332px;
+    top: 125px; */
+
+    /* font-family: 'Poppins'; */
+    height: 60px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 22px;
+    /* or 55% */
+    letter-spacing: 0.01em;
+
+    /* beige */
+    color: #9D855C;
+
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    align-items: center;
+
+}
+
+.items--header>span {
+    margin-right: auto;
+}
+
+/* Rectangle 48 */
+
+#search-form {
+    /* Rectangle 48 */
+
+    box-sizing: border-box;
+
+    /* position: absolute;
+ 
+    left: 695px;
+    top: 119px; */
+
+    width: 392px;
+    height: 40px;
+    margin-right: auto;
+    /* background: #FFFFFF; */
+    /* beige */
+    /* border: 1px solid #9D855C;
+    border-radius: 6px; */
+
+
+}
+
+#search-form>input[type="search"] {
+    width: 100%;
+    height: 100%;
+    padding-left: 2rem;
+    background: #FFFFFF;
+    /* beige */
+    border: 1px solid #9D855C;
+    border-radius: 6px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='%23999' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0.625rem 0.75rem;
+    background-size: 1rem;
+    position: relative;
+}
+
+#search-form>input[type="search"].loading {
+    background-image: none;
+}
+
+#search-spinner {
+    width: 1rem;
+    height: 1rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23000' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M20 4v5h-.582m0 0a8.001 8.001 0 00-15.356 2m15.356-2H15M4 20v-5h.581m0 0a8.003 8.003 0 0015.357-2M4.581 15H9' /%3E%3C/svg%3E");
+    animation: spin 1s infinite linear;
+    position: absolute;
+    left: 38.25rem;
+    top: 8.95rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

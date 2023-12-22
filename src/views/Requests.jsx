@@ -1,4 +1,3 @@
-
 import {
     useLoaderData,
     useNavigation,
@@ -113,8 +112,7 @@ export async function loader({ request }) {
 
 
 
-export default function Tickets() {
-    // add here a variable to actually hold the list of tickets
+export default function Requests() {
     const { q, tickets } = useLoaderData();
     const navigation = useNavigation();
 
@@ -126,29 +124,31 @@ export default function Tickets() {
     const searching =
         navigation.location &&
         new URLSearchParams(navigation.location.search).has(
-            "Tickets"
+            "Requests"
         );
 
     useEffect(() => {
-        document.getElementById("Tickets").value = q;
+        document.getElementById("Requests").value = q;
     }, [q]);
 
     return (
+
         <>
-            <Header name={"Tickets"} searching={searching} q={q} />
+        <Header name={"Requests"} searching={searching} q={q} />
 
 
-            {/* make this a component */}
-            <div className="display--elements">
-                {/* map to tickets here with a component  */}
-                {Items}
+        {/* make this a component */}
+        <div className="display--elements">
+            {/* map to tickets here with a component  */}
+            {Items}
 
-            </div>
-
-
+        </div>
 
 
-        </>
+
+
+    </>
+
 
     );
 }

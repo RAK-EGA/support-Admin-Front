@@ -78,7 +78,7 @@ export default function NavBar() {
                     </li>
                     <li>
                         <NavLink
-                            to={`contacts/`}
+                            to={`requests/`}
                             className={({ isActive, isPending }) =>
                                 isActive
                                     ? "active"
@@ -87,7 +87,7 @@ export default function NavBar() {
                                         : ""
                             }
                         >
-                            <img src={permitsIcon} alt="users Icon" /><span>Permits</span>
+                            <img src={permitsIcon} alt="users Icon" /><span>Requests</span>
                         </NavLink>
                     </li>
 
