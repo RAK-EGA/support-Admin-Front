@@ -28,6 +28,9 @@ import Request, {
 import Index from "./views/Index";
 
 import ErrorPage from "./views/errorPage";
+import Announcements,{
+  loader as anouncementsLoader,
+} from "./views/Announcements";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -61,6 +64,13 @@ const router = createBrowserRouter(
           element={<Request />}
           loader={requestLoader}
           action={requestAction}
+        />
+
+        <Route
+          path="announcements/"
+          element={<Announcements/>}
+          loader={anouncementsLoader}
+        // action={}
         />
 
       </Route>

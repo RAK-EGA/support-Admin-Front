@@ -35,7 +35,7 @@ export default function NavBar() {
                     </li>
                     <li>
                         <NavLink
-                            to={`contacts/`}
+                            to={`announcements/`}
                             className={({ isActive, isPending }) =>
                                 isActive
                                     ? "active"

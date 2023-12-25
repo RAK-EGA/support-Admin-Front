@@ -1,0 +1,66 @@
+.announcements--containter {
+
+    overflow-y: scroll;
+    height: 80%;
+    padding: 1rem;
+}
+
+
+.announcement {
+    padding: 1rem;
+    margin-top: 3rem;
+    width: 100%;
+    background-color: #F3F1EA;
+
+    /* Rectangle 59 */
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    gap: 1rem;
+
+}
+
+.announcement--info>h6 {
+    /* Real estate trading Statistical Reports of real estate trading in RAK shows that there is increasing in the acquisition rate by 20% since his highness signed a document for encouraging the young citizens to buy real estates at lower prices */
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+    /* or 157% */
+    letter-spacing: 0.01em;
+    text-decoration-line: underline;
+
+    color: #523503;
+
+
+}
+
+.announcement--info>p {
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+    /* or 157% */
+    letter-spacing: 0.01em;
+
+    /* beige */
+    color: #9D855C;
+
+
+
+
+}
+
+.announcement>input[type="checkbox" i] {
+    /* Checkbox/Neutral */
+
+    box-sizing: border-box;
+
+
+    /* beige */
+    border: 1.5px solid #9D855C;
+    border-radius: 3px;
+
+}

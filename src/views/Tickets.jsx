@@ -116,7 +116,7 @@ export async function loader({ request }) {
 
 
 export default function Tickets() {
-    // add here a variable to actually hold the list of tickets
+
     const { q, tickets } = useLoaderData();
     const navigation = useNavigation();
 
