@@ -1,4 +1,5 @@
 import {
+    Link,
     useLoaderData,
     useNavigation,
 
@@ -12,99 +13,87 @@ import { useEffect } from "react";
 // spinner should work test it out when apis are made
 export async function loader({ request }) {
     const url = new URL(request.url);
-    const q = url.searchParams.get("Tickets");
+    const q = url.searchParams.get("Requests");
     console.log(`here is your query I will filter the tickets with it eventually I promise
     q = ${q}`);
-    // make api call to get tickets here they com,e filtered show only
-    const tickets = [
+    // make api call to get requests  here they com,e filtered show only
+    const requests = [
         {
-            id: '#1',
+            id: '1',
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "resolved"
-            // add data here for tickets
         },
         {
             id: 2,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "unresolved"
-            // add data here for tickets
         },
         {
             id: 3,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "processing"
-            // add data here for tickets
         },
         {
             id: 4,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "processing"
-            // add data here for tickets
         },
         {
             id: 5,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "processing"
-            // add data here for tickets
         },
         {
             id: 6,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "resolved"
-            // add data here for tickets
         },
         {
             id: 7,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "resolved"
-            // add data here for tickets
         },
         {
             id: 8,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "unresolved"
-            // add data here for tickets
         },
         {
             id: 9,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "unresolved"
-            // add data here for tickets
         },
         {
             id: 10,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "unresolved"
-            // add data here for tickets
         },
 
     ]
-
-    return { q, tickets };
+    return { q, requests };
 }
 
 
-// use this when heading to view a specific ticket
 // export async function action() {
 //     const contact = await createContact();
 //     return redirect(`/contacts/${contact.id}/edit`);
@@ -113,11 +102,21 @@ export async function loader({ request }) {
 
 
 export default function Requests() {
-    const { q, tickets } = useLoaderData();
+    const { q, requests } = useLoaderData();
     const navigation = useNavigation();
 
-    const Items = tickets.map((ticket) => {
-        return (<ListItem key={ticket.id} item={ticket} />);
+    const Items = requests.map((request) => {
+        return (
+
+            <Link
+                to={`${request.id}`}
+                key={request.id}
+
+            >
+                <ListItem item={request} />
+            </Link>
+
+        );
 
     });
 
@@ -134,20 +133,18 @@ export default function Requests() {
     return (
 
         <>
-        <Header name={"Requests"} searching={searching} q={q} />
+            <Header name={"Requests"} searching={searching} q={q} />
 
 
-        {/* make this a component */}
-        <div className="display--elements">
-            {/* map to tickets here with a component  */}
-            {Items}
+            <div className="display--elements">
+                {Items}
 
-        </div>
+            </div>
 
 
 
 
-    </>
+        </>
 
 
     );

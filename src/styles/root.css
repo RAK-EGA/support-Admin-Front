@@ -74,9 +74,10 @@ nav>ul>li>a {
 }
 
 nav>ul>li>a.active {
-background-color: #F3F1EA;
+    background-color: #F3F1EA;
 
 }
+
 nav>ul>li>a.pending {
     background-color: #f3f1ea6e;
 }
@@ -257,6 +258,10 @@ button:active {
 
 }
 
+.item--container:hover {
+    background-color: #D9D5EC;
+}
+
 .item--info {
     display: flex;
     flex-direction: column;
@@ -328,7 +333,8 @@ button:active {
     font-size: 12px;
     line-height: 15px;
 }
-.status--holder>svg{
+
+.status--holder>svg {
     position: relative;
     left: 0.5rem;
     margin-right: 15px;
@@ -427,3 +433,47 @@ button:active {
         transform: rotate(360deg);
     }
 }
+
+/* ticket stuff */
+.ticket--info {
+    color: #6E6893;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 2rem;
+}
+
+.attachments--holder{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 13px;
+    line-height: 22px;
+    color: black;
+    /* or 55% */
+    letter-spacing: 0.01em;
+
+}
+.attachment{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    gap: 5px;
+    height: 40px;
+}
+.attachment:hover{
+ background-color: #dbdbdb;
+}
+.attachment>a{
+    text-decoration: none;
+    color: black;
+}
+.attachment>img{
+    width: 30px;
+
+}
+
+/* end ticket stuff */

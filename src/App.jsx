@@ -1,3 +1,5 @@
+import Root from "./views/Root";
+
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -5,23 +7,36 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Root from "./views/Root";
 import Tickets, {
   loader as ticketsLoader,
 } from "./views/Tickets";
 
+import Ticket, {
+  loader as ticketLoader,
+  action as ticketAction,
+} from "./views/Ticket";
+
 import Requests, {
   loader as requestsLoader
 } from "./views/Requests";
+
+import Request, {
+  loader as requestLoader,
+  action as requestAction,
+} from "./views/Request";
+
 import Index from "./views/Index";
+
+import ErrorPage from "./views/errorPage";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
       path="/"
       element={<Root />}
-      errorElement={<div>Oh no baby</div>}
+      errorElement={<ErrorPage />}
     >
-      <Route errorElement={<div>Oh no baby</div>}>
+      <Route errorElement={<ErrorPage />}>
         <Route index element={<Index />} />
         <Route
           path="tickets/"
@@ -34,6 +49,18 @@ const router = createBrowserRouter(
           element={<Requests />}
           loader={requestsLoader}
         // action={}
+        />
+        <Route
+          path="tickets/:ticketId"
+          element={<Ticket />}
+          loader={ticketLoader}
+          action={ticketAction}
+        />
+        <Route
+          path="requests/:requestId"
+          element={<Request />}
+          loader={requestLoader}
+          action={requestAction}
         />
 
       </Route>

@@ -1,5 +1,6 @@
 
 import {
+    Link,
     useLoaderData,
     useNavigation,
 
@@ -17,11 +18,12 @@ export async function loader({ request }) {
     console.log(`here is your query I will filter the tickets with it eventually I promise
     q = ${q}`);
     // make api call to get tickets here they com,e filtered show only
+
     const tickets = [
         {
-            id: '#1',
+            id: '1',
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "resolved"
             // add data here for tickets
@@ -29,7 +31,7 @@ export async function loader({ request }) {
         {
             id: 2,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "unresolved"
             // add data here for tickets
@@ -37,7 +39,7 @@ export async function loader({ request }) {
         {
             id: 3,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "processing"
             // add data here for tickets
@@ -45,7 +47,7 @@ export async function loader({ request }) {
         {
             id: 4,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "processing"
             // add data here for tickets
@@ -53,7 +55,7 @@ export async function loader({ request }) {
         {
             id: 5,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "processing"
             // add data here for tickets
@@ -61,7 +63,7 @@ export async function loader({ request }) {
         {
             id: 6,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "resolved"
             // add data here for tickets
@@ -69,7 +71,7 @@ export async function loader({ request }) {
         {
             id: 7,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "resolved"
             // add data here for tickets
@@ -77,7 +79,7 @@ export async function loader({ request }) {
         {
             id: 8,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "unresolved"
             // add data here for tickets
@@ -85,7 +87,7 @@ export async function loader({ request }) {
         {
             id: 9,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "unresolved"
             // add data here for tickets
@@ -93,7 +95,7 @@ export async function loader({ request }) {
         {
             id: 10,
             category: 'garbage',
-            location: 'your head rent free',
+            location: 'RAK',
             date: '18/12/2023',
             status: "unresolved"
             // add data here for tickets
@@ -119,7 +121,15 @@ export default function Tickets() {
     const navigation = useNavigation();
 
     const Items = tickets.map((ticket) => {
-        return (<ListItem key={ticket.id} item={ticket} />);
+        return (
+            <Link
+                to={`${ticket.id}`}
+                key={ticket.id}
+
+            >
+                <ListItem  item={ticket} />
+            </Link>
+        );
 
     });
 
