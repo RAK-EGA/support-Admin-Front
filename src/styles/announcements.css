@@ -64,3 +64,37 @@
     border-radius: 3px;
 
 }
+
+.forms--holder {
+
+    margin-top: 2rem;
+    padding:3rem;
+    display: flex;
+    gap: 1rem;
+
+    justify-content: flex-end;
+}
+
+.forms--holder>form>button {
+
+    height: 27px;
+    width: 71px;
+
+    /* beige */
+    background: #9D855C;
+    border-radius: 6px;
+    
+    border-color: #9D855C;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+
+    /* Backgrounds/Primary */
+    color: #FFFFFF;
+
+
+}

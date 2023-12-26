@@ -28,9 +28,14 @@ import Request, {
 import Index from "./views/Index";
 
 import ErrorPage from "./views/errorPage";
-import Announcements,{
+
+import Announcements, {
   loader as anouncementsLoader,
 } from "./views/Announcements";
+
+import {
+  action as deleteAction,
+} from "./views/DeleteAnnouncements"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -68,9 +73,13 @@ const router = createBrowserRouter(
 
         <Route
           path="announcements/"
-          element={<Announcements/>}
+          element={<Announcements />}
           loader={anouncementsLoader}
         // action={}
+        />
+        <Route
+          path="announcements/delete"
+          action={deleteAction}
         />
 
       </Route>
