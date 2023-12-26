@@ -3,7 +3,7 @@ import errorImage from "../assets/errorImage.png"
 
 export default function ErrorPage() {
   const error = useRouteError();
-  console.error(error);
+  // console.error(error);
 
   return (
     <div id="error-page">

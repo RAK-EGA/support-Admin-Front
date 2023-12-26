@@ -1,21 +1,20 @@
 import {
     Form,
     useLoaderData,
-    useNavigation,
     useSubmit,
+} from "react-router-dom";
 
+import Modal from "../components/Modal";
+import useModal from "../customHooks/useModal";
 
-} from "react-router-dom"
-
-import imgIcon from "../assets/imgIcon.png"
-import samplePDf from "../assets/sample.pdf"
+import imgIcon from "../assets/imgIcon.png";
 import Header from "../components/Header";
-import { useEffect } from "react";
+
 
 // spinner should work test it out when apis are made
 export async function loader({ params }) {
     // make api call to get tickets here they com,e filtered show only
-    // const ticket = await getTicket(params.ticketId);
+    // const ticket = await getTicket(.ticketIdparams);
     // console.log(params.ticketId);
     const ticket =
     {
@@ -24,7 +23,7 @@ export async function loader({ params }) {
         location: 'RAK',
         issueDate: '18/12/2023',
         status: "resolved",
-        Attachments: [imgIcon, samplePDf],
+        Attachments: ["https://www.epicnonsense.com/wp-content/uploads/2013/05/d153805f768c94a3006d630caab0e178.jpg", "https://www.pio.gov.cy/coronavirus/uploads/Lorem_ipsum.pdf","https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"],
         // add data here for tickets
     }
     if (!ticket) {
@@ -56,6 +55,8 @@ export async function action({ request, params }) {
 export default function Ticket() {
 
     const { ticket } = useLoaderData();
+    const { isShowing, toggle, fileInfo, setInfo } = useModal();
+
     const submit = useSubmit();
 
     let keys = [];
@@ -87,21 +88,36 @@ export default function Ticket() {
     const Attachments = ticket.hasOwnProperty('Attachments') ? ticket['Attachments'].map((a) => {
 
         const fileName = a.split("/").at(-1)
-        const type = fileName.split('.')[1] ? fileName.split('.')[1]: fileName.split(';')[0];
+        const type = fileName.split('.')[1] ? fileName.split('.')[1] : fileName.split(';')[0];
         return (
-            <a href={a} key={a} target={`attachment${a}`}>
-                <div className="attachment">
-                    {/* for now one Icon for all if we have time an icon for each */}
+            // <a href={a} key={a} target={`attachment${a}`}>
+            <div key={a}
+            >
+                <div
+                    className="attachment"
+                    onClick={() => {
+                        setInfo(type,a);
+                        toggle();
+                    }}
+                >
                     <img src={imgIcon} alt="documentIcon" />
                     <span>{type}</span>
+
+
                 </div>
-            </a>
+
+
+            </div>
+
+
 
         );
     }) : null;
 
     return (
         <>
+            <Modal isShowing={isShowing} hide={toggle} fileInfo={fileInfo} />
+
             <Header name={ticket.id} allowSearch={false} />
 
 
