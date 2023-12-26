@@ -87,12 +87,13 @@ export default function Ticket() {
     const Attachments = ticket.hasOwnProperty('Attachments') ? ticket['Attachments'].map((a) => {
 
         const fileName = a.split("/").at(-1)
+        const type = fileName.split('.')[1] ? fileName.split('.')[1]: fileName.split(';')[0];
         return (
             <a href={a} key={a} target={`attachment${a}`}>
                 <div className="attachment">
                     {/* for now one Icon for all if we have time an icon for each */}
                     <img src={imgIcon} alt="documentIcon" />
-                    <span>{fileName}</span>
+                    <span>{type}</span>
                 </div>
             </a>
 

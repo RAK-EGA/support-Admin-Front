@@ -3,11 +3,11 @@ import {
     useLoaderData,
     useNavigation,
     Form,
+    redirect,
 
 
 } from "react-router-dom"
 
-import ListItem from "../components/ListItem";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 
@@ -17,8 +17,8 @@ import "../styles/announcements.css"
 export async function loader({ request }) {
     const url = new URL(request.url);
     const q = url.searchParams.get("Announcements");
-    console.log(`here is your query I will filter the tickets with it eventually I promise
-    Announcements = ${q}`);
+    console.log(`here is your query I will filter the Announcements with it eventually I promise
+    q = ${q}`);
     // make api call to get tickets here they com,e filtered show only
 
     const announcements = [
@@ -77,6 +77,7 @@ export async function action() {
     const announce={
         id:420,
     }
+    console.log(announce.id);
     // const announce = await createAnnounce();
     return redirect(`/announcements/${announce.id}/edit`);
 }
@@ -188,7 +189,7 @@ export default function Announcements() {
                     <button type="submit">Delete</button>
                 </Form>
                 <Form
-                    action="post"
+                    method="post"
                 >
                     <button type="submit">Add</button>
 

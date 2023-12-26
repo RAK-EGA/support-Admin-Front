@@ -14,82 +14,29 @@ import { useEffect } from "react";
 export async function loader({ request }) {
     const url = new URL(request.url);
     const q = url.searchParams.get("Requests");
-    console.log(`here is your query I will filter the tickets with it eventually I promise
+    console.log(`here is your query I will filter the Requests with it eventually I promise
     q = ${q}`);
     // make api call to get requests  here they com,e filtered show only
-    const requests = [
-        {
-            id: '1',
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "resolved"
-        },
-        {
-            id: 2,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "unresolved"
-        },
-        {
-            id: 3,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "processing"
-        },
-        {
-            id: 4,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "processing"
-        },
-        {
-            id: 5,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "processing"
-        },
-        {
-            id: 6,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "resolved"
-        },
-        {
-            id: 7,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "resolved"
-        },
-        {
-            id: 8,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "unresolved"
-        },
-        {
-            id: 9,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "unresolved"
-        },
-        {
-            id: 10,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "unresolved"
-        },
+    const createRequests = () => {
+        const reqs = []
+        for (let i = 1; i < 11; i++) {
+            const rand = Math.floor(Math.random()*3)+1
+            reqs.push(
+                {
+                    id: `${i}`,
+                    category: 'garbage',
+                    location: 'RAK',
+                    date: '18/12/2023',
+                    status: rand==1?"opened": rand==2?"proccessing": "closed",
+                    // add data here for tickets
+                },
 
-    ]
+            );
+
+        }
+        return reqs;
+    };
+    const requests = createRequests();
     return { q, requests };
 }
 

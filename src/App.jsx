@@ -30,12 +30,23 @@ import Index from "./views/Index";
 import ErrorPage from "./views/ErrorPage";
 
 import Announcements, {
-  loader as anouncementsLoader,
+  loader as announcementsLoader,
+  action as announcementsAction,
 } from "./views/Announcements";
 
 import {
-  action as deleteAction,
+  action as deleteAnnouncementsAction,
 } from "./views/DeleteAnnouncements"
+
+
+import Users,{
+  action as usersAction,
+  loader as usersLoader,
+} from "./views/User";
+
+import {
+  action as deleteUsersAction,
+} from "./views/DeleteUsers"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -74,12 +85,22 @@ const router = createBrowserRouter(
         <Route
           path="announcements/"
           element={<Announcements />}
-          loader={anouncementsLoader}
-        // action={}
+          loader={announcementsLoader}
+          action={announcementsAction }
         />
         <Route
           path="announcements/delete"
-          action={deleteAction}
+          action={deleteAnnouncementsAction}
+        />
+        <Route
+          path="users/"
+          element={<Users/>}
+          action={usersAction}
+          loader={usersLoader}
+        />
+        <Route
+          path="users/delete"
+          action={deleteUsersAction}
         />
 
       </Route>

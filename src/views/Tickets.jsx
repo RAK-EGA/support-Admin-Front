@@ -19,90 +19,26 @@ export async function loader({ request }) {
     q = ${q}`);
     // make api call to get tickets here they com,e filtered show only
 
-    const tickets = [
-        {
-            id: '1',
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "resolved"
-            // add data here for tickets
-        },
-        {
-            id: 2,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "unresolved"
-            // add data here for tickets
-        },
-        {
-            id: 3,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "processing"
-            // add data here for tickets
-        },
-        {
-            id: 4,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "processing"
-            // add data here for tickets
-        },
-        {
-            id: 5,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "processing"
-            // add data here for tickets
-        },
-        {
-            id: 6,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "resolved"
-            // add data here for tickets
-        },
-        {
-            id: 7,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "resolved"
-            // add data here for tickets
-        },
-        {
-            id: 8,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "unresolved"
-            // add data here for tickets
-        },
-        {
-            id: 9,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "unresolved"
-            // add data here for tickets
-        },
-        {
-            id: 10,
-            category: 'garbage',
-            location: 'RAK',
-            date: '18/12/2023',
-            status: "unresolved"
-            // add data here for tickets
-        },
+    const createTickets = () => {
+        const reqs = []
+        for (let i = 1; i < 11; i++) {
 
-    ]
+            const rand = Math.floor(Math.random()*3)+1
 
+            reqs.push(
+                {
+                    id: `${i}`,
+                    category: 'garbage',
+                    location: 'RAK',
+                    date: '18/12/2023',
+                    status: rand==1?"opened": rand==2?"proccessing": "closed",
+                    // add data here for tickets
+                },
+            );
+        }
+        return reqs;
+    };
+    const tickets = createTickets();
     return { q, tickets };
 }
 

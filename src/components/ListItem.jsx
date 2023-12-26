@@ -1,5 +1,5 @@
 export default function ListItem({item}) {
-    const color = item.status==="resolved"?"green":item.status==="unresolved"?"red":"gray" 
+    const color = item.status==="closed"?"green":item.status==="opened"?"red":"gray" 
     const pointFill = color=="green"?"#007F00":color=="red"?"#D30000":"#767676"
     return (
 
