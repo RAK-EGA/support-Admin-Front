@@ -27,7 +27,7 @@ import Request, {
 
 import Index from "./views/Index";
 
-import ErrorPage from "./views/errorPage";
+import ErrorPage from "./views/ErrorPage";
 
 import Announcements, {
   loader as anouncementsLoader,
