@@ -75,11 +75,13 @@ nav>ul>li>a {
 
 nav>ul>li>a.active {
     background-color: #F3F1EA;
+    border-radius: 10px;
 
 }
 
 nav>ul>li>a.pending {
     background-color: #f3f1ea6e;
+    border-radius: 10px;
 }
 
 nav>ul>li>img {
@@ -150,15 +152,64 @@ nav>ul>li>a>span {
    
 } */
 
-.custom.react-toggle--checked .react-toggle-track {
+.custom .react-toggle-track {
     /* change color for dark */
     /* Toogle */
-    /* background-color: #E9F5FE; */
+    background-color: #E9F5FE;
+    /* ON */
 
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11.8916px;
+    line-height: 18px;
+    /* identical to box height, or 154% */
+    letter-spacing: 0.02em;
+
+    /* beige */
+    color: #9D855C;
+
+
+    text-align: center;
+
+
+
+}
+
+.custom.react-toggle--checked .react-toggle-track {
+    background-color: #E9F5FE;
+
+}
+
+.custom.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+    background-color: #E9F5FE;
+}
+
+
+.custom.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+    background-color: #E9F5FE
+}
+
+.custom .react-toggle-thumb {
+    background-color: #9D855C;
+    width: 14px;
+    height: 14px;
+    top: 5px;
+    left: 6px;
 }
 
 .toggle--lable {
     margin-right: auto;
+}
+
+.custom .react-toggle-track-x {
+    top: 11px;
+    bottom: 0px;
+    right: 12px;
+}
+
+.custom .react-toggle-track-check {
+    top: 10px;
+    left: 6px;
 }
 
 /* toggle end */
@@ -443,7 +494,7 @@ button:active {
     margin: 2rem;
 }
 
-.attachments--holder{
+.attachments--holder {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
@@ -456,7 +507,8 @@ button:active {
     letter-spacing: 0.01em;
 
 }
-.attachment{
+
+.attachment {
     padding: 10px;
     display: flex;
     align-items: center;
@@ -464,14 +516,17 @@ button:active {
     gap: 5px;
     height: 40px;
 }
-.attachment:hover{
- background-color: #dbdbdb;
+
+.attachment:hover {
+    background-color: #dbdbdb;
 }
-.attachment>a{
+
+.attachment>a {
     text-decoration: none;
     color: black;
 }
-.attachment>img{
+
+.attachment>img {
     width: 30px;
 
 }

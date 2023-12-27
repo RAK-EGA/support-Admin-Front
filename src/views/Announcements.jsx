@@ -13,57 +13,85 @@ import { useEffect, useState } from "react";
 
 import "../styles/announcements.css"
 
+import { instance } from "./SignIn";
+
 // spinner should work test it out when apis are made
 export async function loader({ request }) {
+    // throw 1;
+    let token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU4YmM0MWI5YTAzMTlhNzk4YmRmMmJhIiwibmFtZSI6IkhhamFyIiwiZW1haWwiOiJoYWphcjEzQGdtYWlsLmNvbSIsImRlcGFydG1lbnQiOiJ0eXR5dHl0eXR5In0sImlhdCI6MTcwMzY4NDA4NiwiZXhwIjoxNzAzNjg1ODg2fQ.T2VIIdxiyf23m2KPjM7rPKC2ix2RlJ3-W_xiO_aea9Q";
+    const a = instance(token);
     const url = new URL(request.url);
     const q = url.searchParams.get("Announcements");
-    console.log(`here is your query I will filter the Announcements with it eventually I promise
-    q = ${q}`);
+    // console.log(`here is your query I will filter the Announcements with it eventually I promise
+    // q = ${q}`);
     // make api call to get tickets here they com,e filtered show only
+    // let announcements;
+
+    // const announce = await a.get('/viewAnnouncements', {
+    //     validateStatus: function (status) {
+    //         // if this function returns true, exception is not thrown, so
+    //         // in simplest case just return true to handle status checks externally.
+    //         return true;
+    //     }
+    // });
+    
+    
+    // announcements = announce.data.announcements;
+
+    // if (announce.status == '401') {
+    //     return redirect('/signIn');
+    // }
+    // else if(announce.status != '200'){
+    //     throw "network error;"
+    // }
+
+
+
 
     const announcements = [
         {
             id: 1,
             title: 'Possible Water Outage',
-            description: 'Between 11:00 AM to 5:00 PM CST expect a complete water outage at Al Rifa Area, Exit No.129, Sheikh Mohammed Bin Zayed Road, P.O Box 5300',
+            body: 'Between 11:00 AM to 5:00 PM CST expect a complete water outage at Al Rifa Area, Exit No.129, Sheikh Mohammed Bin Zayed Road, P.O Box 5300',
         },
         {
             id: 2,
             title: 'Real estate trading',
-            description: 'Statistical Reports of real estate trading in RAK shows that there is increasing in the acquisition rate by 20% since his highness signed a document for encouraging the young citizens to buy real estates at lower prices',
+            body: 'Statistical Reports of real estate trading in RAK shows that there is increasing in the acquisition rate by 20% since his highness signed a document for encouraging the young citizens to buy real estates at lower prices',
         },
         {
             id: 3,
             title: 'Green Garden',
-            description: 'check out the latest news about green garden project announced by his glorified highness to make ras al khaima a better place',
+            body: 'check out the latest news about green garden project announced by his glorified highness to make ras al khaima a better place',
         },
         {
             id: 4,
             title: 'New Hospitals issued',
-            description: 'His highness opened Mohamed ibn zaid  hospital in rak in cordinnace of enhancing the public health field ',
+            body: 'His highness opened Mohamed ibn zaid  hospital in rak in cordinnace of enhancing the public health field ',
         },
         {
             id: 5,
             title: 'Lorem ipsum dolor',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
+            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
 
         },
         {
             id: 6,
             title: 'Lorem ipsum dolor',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
+            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
 
         },
         {
             id: 7,
             title: 'Lorem ipsum dolor',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
+            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
 
         },
         {
             id: 8,
             title: 'Lorem ipsum dolor',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
+            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
         }
 
     ]
@@ -74,8 +102,8 @@ export async function loader({ request }) {
 
 export async function action() {
     // create new announcement and redirect to edit page for that announcement
-    const announce={
-        id:420,
+    const announce = {
+        id: 420,
     }
     console.log(announce.id);
     // const announce = await createAnnounce();
@@ -108,18 +136,18 @@ export default function Announcements() {
     const Items = announcements.map((announcement) => {
         return (
             <div
-                key={announcement.id}
+                key={announcement._id}
             >
 
                 {/* this changes */}
                 <div className="announcement">
                     <input type="checkbox" name="" id=""
                         onChange={() => {
-                            handleChange(announcement.id);
+                            handleChange(announcement._id);
                         }}
                     />
                     <Link
-                        to={`${announcement.id}`}
+                        to={`${announcement._id}`}
                         style={{
                             textDecoration: 'none',
                         }}
@@ -127,7 +155,7 @@ export default function Announcements() {
                     >
                         <div className="announcement--info">
                             <h6>{announcement.title}</h6>
-                            <p>{announcement.description}</p>
+                            <p>{announcement.body}</p>
 
                         </div>
                     </Link>

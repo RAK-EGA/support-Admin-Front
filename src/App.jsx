@@ -39,7 +39,7 @@ import {
 } from "./views/DeleteAnnouncements"
 
 
-import Users,{
+import Users, {
   action as usersAction,
   loader as usersLoader,
 } from "./views/User";
@@ -47,63 +47,79 @@ import Users,{
 import {
   action as deleteUsersAction,
 } from "./views/DeleteUsers"
+import SignIn from "./views/SignIn";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      path="/"
-      element={<Root />}
-      errorElement={<ErrorPage />}
+    <Route errorElement={<ErrorPage />}
     >
-      <Route errorElement={<ErrorPage />}>
-        <Route index element={<Index />} />
-        <Route
-          path="tickets/"
-          element={<Tickets />}
-          loader={ticketsLoader}
-        // action={} when going to specific
-        />
-        <Route
-          path="requests/"
-          element={<Requests />}
-          loader={requestsLoader}
-        // action={}
-        />
-        <Route
-          path="tickets/:ticketId"
-          element={<Ticket />}
-          loader={ticketLoader}
-          action={ticketAction}
-        />
-        <Route
-          path="requests/:requestId"
-          element={<Request />}
-          loader={requestLoader}
-          action={requestAction}
-        />
 
-        <Route
-          path="announcements/"
-          element={<Announcements />}
-          loader={announcementsLoader}
-          action={announcementsAction }
-        />
-        <Route
-          path="announcements/delete"
-          action={deleteAnnouncementsAction}
-        />
-        <Route
-          path="users/"
-          element={<Users/>}
-          action={usersAction}
-          loader={usersLoader}
-        />
-        <Route
-          path="users/delete"
-          action={deleteUsersAction}
-        />
+      <Route
+        path="/"
+        element={<Root />}
+        errorElement={<ErrorPage />}
+      >
+        <Route errorElement={<ErrorPage />}>
+          <Route index element={<Index />} />
+          <Route
+            path="tickets/"
+            element={<Tickets />}
+            loader={ticketsLoader}
+          // action={} when going to specific
+          />
+          <Route
+            path="requests/"
+            element={<Requests />}
+            loader={requestsLoader}
+          // action={}
+          />
+          <Route
+            path="tickets/:ticketId"
+            element={<Ticket />}
+            loader={ticketLoader}
+            action={ticketAction}
+          />
+          <Route
+            path="requests/:requestId"
+            element={<Request />}
+            loader={requestLoader}
+            action={requestAction}
+          />
 
+          <Route
+            path="announcements/"
+            element={<Announcements />}
+            loader={announcementsLoader}
+            action={announcementsAction}
+            errorElement={<ErrorPage />}
+
+          />
+          <Route
+            path="announcements/delete"
+            action={deleteAnnouncementsAction}
+          />
+          <Route
+            path="users/"
+            element={<Users />}
+            action={usersAction}
+            loader={usersLoader}
+            errorElement={<ErrorPage />}
+          />
+          <Route
+            path="users/delete"
+            action={deleteUsersAction}
+          />
+
+        </Route>
       </Route>
+      <Route
+        path="signIn/"
+        element={<SignIn />}
+
+      >
+      </Route>
+
     </Route>
   )
 );

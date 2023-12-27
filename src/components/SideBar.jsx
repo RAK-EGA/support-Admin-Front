@@ -95,7 +95,7 @@ export default function NavBar() {
 
             </nav>
             <div className="side--bottom">
-                <div className="dark--mode">
+                {/* <div className="dark--mode">
                     <img src={darkmodeIcon} style={{
                         height: '43px',
                         width: '43px'
@@ -106,9 +106,13 @@ export default function NavBar() {
                     <Toggle
                         name="toggle-1"
                         className="custom"
+                        icons={{
+                            checked: "On",
+                            unchecked:"Off",
+                        }}
                         onChange={e => console.log("onToggle", e.target.checked)}
                     />
-                </div>
+                </div> */}
 
                 <div >
                     <button className="logout--button">

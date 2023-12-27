@@ -1,0 +1,104 @@
+.login--image {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../assets/signImage.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: 0;
+
+}
+
+
+.big {
+    background-color: #282828;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    opacity: .5;
+
+
+}
+
+.test {
+
+
+    background: rgba(210, 199, 173, 0.25);
+    box-shadow: 9px 9px 4px rgba(157, 132, 92, 0.31);
+
+    /* SIGN IN */
+
+    width: 153px;
+    height: 59px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 60px;
+
+    color: #6F5323;
+
+
+
+
+    /* Error Message */
+
+    position: absolute;
+    width: 37px;
+    left: 0px;
+    top: 38.33%;
+    bottom: 36.67%;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+
+    color: #E71010;
+
+    opacity: 0.8;
+
+
+    /* Box */
+
+    box-sizing: border-box;
+
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+
+    background: #FFFFFF;
+    border: 1px solid #D5D8DE;
+    border-radius: 4px;
+
+
+    /* Key Field */
+
+    position: absolute;
+    width: 37px;
+    left: 16px;
+    top: 21.67%;
+    bottom: 53.33%;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+
+    color: #323941;
+
+    opacity: 0.8;
+
+}
