@@ -48,7 +48,7 @@ export default function NavBar() {
                         </NavLink>
 
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink
                             to={`News/`}
                             className={({ isActive, isPending }) =>
@@ -61,7 +61,7 @@ export default function NavBar() {
                         >
                             <img src={newsIcon} alt="news Icon" /><span>News</span>
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                         <NavLink
                             to={`users/`}

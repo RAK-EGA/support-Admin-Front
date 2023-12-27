@@ -35,18 +35,58 @@
     padding: 0 2rem;
 
 }
-
-.info--container{
-    display: flex;
+.user--container>a {
     width: 100%;
+}
+
+
+.info--container {
+    display: flex;
+    min-width: 100%;
     gap: 2rem;
 }
 
-.info--container:hover{
+.info--container:hover {
     background-color: #D9D5EC;
 }
 
 
-.user--container>input[type="checkbox" i]{
+.user--container>input[type="checkbox" i] {
     margin-left: auto;
+}
+
+.user--info {
+
+    height: 100%;
+    width: 100%;
+
+    display: flex; 
+    flex-direction: column;
+    gap: 0.32rem;
+    justify-content: center;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    letter-spacing: 0.05em;
+
+    /* Fonts/Primary Variant */
+    color: #6E6893;
+
+}
+
+.user--info>h6 {
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    /* Fonts/Primary */
+    color: #25213B;
+
+
+
 }

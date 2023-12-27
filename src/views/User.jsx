@@ -89,7 +89,7 @@ export default function Users() {
                     <div className="info--container">
                         <img src={profileImage} alt="" />
                         <div className="user--info">
-                            <h6>{user.username}</h6>
+                            <h6>{user.username} #{user.id}</h6>
                             <span>{user.location}</span>
                         </div>
 
