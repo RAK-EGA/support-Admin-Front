@@ -4,6 +4,7 @@ import {
     useNavigation,
     Form,
     redirect,
+    useSubmit,
 
 
 } from "react-router-dom"
@@ -18,31 +19,43 @@ import { instance } from "./SignIn";
 // spinner should work test it out when apis are made
 export async function loader({ request }) {
     // throw 1;
-    let token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU4YmM0MWI5YTAzMTlhNzk4YmRmMmJhIiwibmFtZSI6IkhhamFyIiwiZW1haWwiOiJoYWphcjEzQGdtYWlsLmNvbSIsImRlcGFydG1lbnQiOiJ0eXR5dHl0eXR5In0sImlhdCI6MTcwMzY4NDA4NiwiZXhwIjoxNzAzNjg1ODg2fQ.T2VIIdxiyf23m2KPjM7rPKC2ix2RlJ3-W_xiO_aea9Q";
-    const a = instance(token);
+    // const user = localStorage.getItem("user");
+    // if (user === null) {
+    //     return redirect('/signIn')
+    // }
+    // const userobj = JSON.parse(user);
+    
+    // const a = instance(userobj.accessToken);
+
+
+    
+    // leave q alone
     const url = new URL(request.url);
     const q = url.searchParams.get("Announcements");
-    // console.log(`here is your query I will filter the Announcements with it eventually I promise
-    // q = ${q}`);
-    // make api call to get tickets here they com,e filtered show only
+    console.log(`here is your query I will filter the Announcements with it eventually I promise
+    q = ${q}`);
+    // leave q alone end
+
+
+    // // make api call to get tickets here they com,e filtered show only
     // let announcements;
 
-    // const announce = await a.get('/viewAnnouncements', {
+    // const announce = await a.get('/support/viewAnnouncements', {
     //     validateStatus: function (status) {
     //         // if this function returns true, exception is not thrown, so
     //         // in simplest case just return true to handle status checks externally.
     //         return true;
     //     }
     // });
-    
-    
+
+
     // announcements = announce.data.announcements;
 
     // if (announce.status == '401') {
     //     return redirect('/signIn');
     // }
-    // else if(announce.status != '200'){
+    // // in side the function  of calidate status return true only if status 401 else catch error
+    // else if (announce.status != '200') {
     //     throw "network error;"
     // }
 
@@ -114,6 +127,8 @@ export async function action() {
 
 export default function Announcements() {
     const [selectedIds, setSelected] = useState([]);
+    const submit = useSubmit();
+    console.log(selectedIds);
     const { q, announcements } = useLoaderData();
     const navigation = useNavigation();
     // console.log(JSON.stringify(selectedIds));
@@ -131,6 +146,9 @@ export default function Announcements() {
 
         }
 
+    }
+    function handleSubmit() {
+        setSelected([]);
     }
 
     const Items = announcements.map((announcement) => {
@@ -186,7 +204,7 @@ export default function Announcements() {
             <Header name={"Announcements"} searching={searching} q={q} />
 
             <div className="announcements--containter">
-                {Items}
+                {announcements.length > 0 ? Items : <div className="no--announcements"><p>No Announcements</p></div>}
 
             </div>
             <div className="forms--holder">
@@ -197,10 +215,12 @@ export default function Announcements() {
                     onSubmit={(event) => {
                         if (
                             !confirm(
-                                "Please confirm you want to delete the selected records."
-                            )
+                                "Please confirm you want to delete the selected records.")
                         ) {
+
                             event.preventDefault();
+                        } else{
+                            handleSubmit();
                         }
                     }}
 
@@ -214,7 +234,11 @@ export default function Announcements() {
                         hidden={true}
                         value={JSON.stringify(selectedIds)}
                     />
-                    <button type="submit">Delete</button>
+                    <button
+                        type="submit"
+                    >
+                        Delete
+                    </button>
                 </Form>
                 <Form
                     method="post"

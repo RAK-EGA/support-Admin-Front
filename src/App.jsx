@@ -47,7 +47,9 @@ import Users, {
 import {
   action as deleteUsersAction,
 } from "./views/DeleteUsers"
-import SignIn from "./views/SignIn";
+import SignIn,{
+  action as signInAction,
+} from "./views/SignIn";
 
 
 const router = createBrowserRouter(
@@ -116,6 +118,7 @@ const router = createBrowserRouter(
       <Route
         path="signIn/"
         element={<SignIn />}
+        action={signInAction}
 
       >
       </Route>

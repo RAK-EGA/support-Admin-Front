@@ -97,5 +97,9 @@
     /* Backgrounds/Primary */
     color: #FFFFFF;
 
-
+}
+.no--announcements{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -8,7 +8,6 @@ export default function Modal({ isShowing, hide, fileInfo }) {
     }
     function show(type) {
         let display
-        console.log(isImage(type),type);
 
         if (isImage(type)) {
             display = (

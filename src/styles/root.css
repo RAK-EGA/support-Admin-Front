@@ -34,7 +34,7 @@
 .side--bar {
     display: flex;
     flex-direction: column;
-
+    border-radius: 35px;
     /* align-items: center; */
     /* justify-content: center; */
     width: 25%;
@@ -246,6 +246,7 @@ button:active {
 
 #detail {
     flex: 1;
+    border-radius: 35px;
     padding: 2rem 4rem;
     width: 100%;
     height: 100%;
@@ -284,6 +285,7 @@ button:active {
 
     height: 90%;
     background-color: #F3F1EA;
+    border-radius: 15px;
     margin-top: 14px;
     margin-bottom: 64px;
     overflow-y: scroll;
@@ -300,7 +302,7 @@ button:active {
     height: 70px;
     display: flex;
     justify-content: space-between;
-
+    margin-top: 1rem;
     /* Rectangle 67 */
     /* 
     background: #E6E6F2; */

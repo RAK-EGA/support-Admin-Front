@@ -127,6 +127,10 @@ export default function Users() {
 
     }
 
+    function handleSubmit(){
+        setSelected([]);
+    }
+
     const searching =
         navigation.location &&
         new URLSearchParams(navigation.location.search).has(
@@ -157,6 +161,8 @@ export default function Users() {
                                 )
                             ) {
                                 event.preventDefault();
+                            } else{
+                                handleChange();
                             }
                         }}
 
