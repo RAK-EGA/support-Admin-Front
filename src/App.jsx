@@ -47,9 +47,11 @@ import Users, {
 import {
   action as deleteUsersAction,
 } from "./views/DeleteUsers"
-import SignIn,{
+import SignIn, {
   action as signInAction,
 } from "./views/SignIn";
+import CreateAnnouncement from "./views/EditAnnouncement";
+import EditAnnouncement from "./views/EditAnnouncement";
 
 
 const router = createBrowserRouter(
@@ -112,6 +114,14 @@ const router = createBrowserRouter(
             path="users/delete"
             action={deleteUsersAction}
           />
+          <Route
+            path="announcements/:id/:intent"
+            element={<EditAnnouncement/>}
+            // action={usersAction}
+            // loader={usersLoader}
+            errorElement={<ErrorPage />}
+          />
+
 
         </Route>
       </Route>
