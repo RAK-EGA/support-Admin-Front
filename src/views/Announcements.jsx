@@ -19,6 +19,8 @@ import { instance } from "./SignIn";
 // spinner should work test it out when apis are made
 export async function loader({ request }) {
     // throw 1;
+   
+
     // const user = localStorage.getItem("user");
     // if (user === null) {
     //     return redirect('/signIn')
@@ -28,7 +30,7 @@ export async function loader({ request }) {
     // const a = instance(userobj.accessToken);
 
 
-    
+
     // leave q alone
     const url = new URL(request.url);
     const q = url.searchParams.get("Announcements");
