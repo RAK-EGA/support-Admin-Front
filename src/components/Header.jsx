@@ -5,7 +5,7 @@ import {
 
 } from "react-router-dom"
 
-export default function Header({ name, searching = false, q = '', allowSearch = true, mess }) {
+export default function Header({ name, searching = false, q = '', allowSearch = true, mess=null }) {
 
     const submit = useSubmit();
 

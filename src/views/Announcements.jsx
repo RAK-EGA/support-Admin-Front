@@ -15,10 +15,10 @@ import "../styles/announcements.css"
 
 import { post } from "../helper functions/helperFunctions";
 // spinner should work test it out when apis are made
-export async function loader({ request }) {
+
+
+export async function loader({ request, params }) {
     // throw 1;
-
-
 
     // leave q alone
     const url = new URL(request.url);
@@ -47,91 +47,49 @@ export async function loader({ request }) {
 
     const [announce, error] = await post("/support/searchAnnouncement", data);
 
-    if (!error) {
-        if (announce.status == '401') {
-            return redirect('/signIn');
-        }
-        else if (announce.status == '404') {
-            announcements = [];
-        }
-        else {
-            announcements = announce.data.announcements;
-        }
-
-
-
-    } else {
+    if (error)
         throw error;
+    if (announce.status == '401') {
+        return redirect('/signIn');
     }
+    else if (announce.status == '404') {
+        announcements = [];
+    }
+    else {
+        announcements = announce.data.announcements;
+    }
+
     // const announcements = [
     //     {
     //         id: 1,
     //         title: 'Possible Water Outage',
     //         body: 'Between 11:00 AM to 5:00 PM CST expect a complete water outage at Al Rifa Area, Exit No.129, Sheikh Mohammed Bin Zayed Road, P.O Box 5300',
     //     },
-    //     {
-    //         id: 2,
-    //         title: 'Real estate trading',
-    //         body: 'Statistical Reports of real estate trading in RAK shows that there is increasing in the acquisition rate by 20% since his highness signed a document for encouraging the young citizens to buy real estates at lower prices',
-    //     },
-    //     {
-    //         id: 3,
-    //         title: 'Green Garden',
-    //         body: 'check out the latest news about green garden project announced by his glorified highness to make ras al khaima a better place',
-    //     },
-    //     {
-    //         id: 4,
-    //         title: 'New Hospitals issued',
-    //         body: 'His highness opened Mohamed ibn zaid  hospital in rak in cordinnace of enhancing the public health field ',
-    //     },
-    //     {
-    //         id: 5,
-    //         title: 'Lorem ipsum dolor',
-    //         body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
-
-    //     },
-    //     {
-    //         id: 6,
-    //         title: 'Lorem ipsum dolor',
-    //         body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
-
-    //     },
-    //     {
-    //         id: 7,
-    //         title: 'Lorem ipsum dolor',
-    //         body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
-
-    //     },
-    //     {
-    //         id: 8,
-    //         title: 'Lorem ipsum dolor',
-    //         body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Turpis egestas pretium aenean pharetra magna ac. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Et netus et malesuada fames.',
-    //     }
 
     // ]
 
-    return { q, announcements, mess };
+    // wont be null If being redirected
+    const status = url.searchParams.get("status");
+    
+
+
+    return { q, announcements, mess, status };
 }
 
 
 export async function action() {
     // create new announcement and redirect to edit page for that announcement
-    const announce = {
-        id: 420,
-    }
-    console.log(announce.id);
     // const announce = await createAnnounce();
-    return redirect(`/announcements/${announce.id}/edit`);
+    return redirect(`/announcements/new/create`);
 }
 
 
-
+// use toastify tomorrow maybe its kinda of a refining feature
 export default function Announcements() {
     const [selectedIds, setSelected] = useState([]);
-    const { q, announcements, mess } = useLoaderData();
+    const { q, announcements, mess, status } = useLoaderData();
 
     const navigation = useNavigation();
-    // console.log(JSON.stringify(selectedIds));
     function handleChange(id) {
         if (selectedIds.indexOf(id) == -1) {
 
@@ -214,7 +172,11 @@ export default function Announcements() {
                     method="post"
 
                     onSubmit={(event) => {
-                        if (
+                        if (selectedIds.length === 0) {
+                            alert("Please select the Announcements you want to delete first")
+                            event.preventDefault();
+                        }
+                        else if (
                             !confirm(
                                 "Please confirm you want to delete the selected records.")
                         ) {

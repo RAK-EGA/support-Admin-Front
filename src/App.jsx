@@ -50,8 +50,10 @@ import {
 import SignIn, {
   action as signInAction,
 } from "./views/SignIn";
-import CreateAnnouncement from "./views/EditAnnouncement";
-import EditAnnouncement from "./views/EditAnnouncement";
+import EditAnnouncement, {
+  loader as editAnnouncementLoader,
+  action as editAnnouncementAction,
+} from "./views/EditAnnouncement";
 
 
 const router = createBrowserRouter(
@@ -96,30 +98,28 @@ const router = createBrowserRouter(
             element={<Announcements />}
             loader={announcementsLoader}
             action={announcementsAction}
-            errorElement={<ErrorPage />}
 
           />
           <Route
             path="announcements/delete"
             action={deleteAnnouncementsAction}
           />
-          <Route
+          {/* moved responsibility to Admin/Service domain */}
+          {/* <Route
             path="users/"
             element={<Users />}
             action={usersAction}
             loader={usersLoader}
-            errorElement={<ErrorPage />}
           />
           <Route
             path="users/delete"
             action={deleteUsersAction}
-          />
+          /> */}
           <Route
             path="announcements/:id/:intent"
-            element={<EditAnnouncement/>}
-            // action={usersAction}
-            // loader={usersLoader}
-            errorElement={<ErrorPage />}
+            element={<EditAnnouncement />}
+            action={editAnnouncementAction}
+            loader={editAnnouncementLoader}
           />
 
 

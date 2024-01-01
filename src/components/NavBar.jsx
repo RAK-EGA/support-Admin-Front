@@ -4,9 +4,14 @@ import profile from "../assets/profile.png"
 export default function NavBar() {
     return (
         <div className="nav--bar">
-            <img className="img--logo" src={logo} alt="logo" />
+            <Link to="/">
+                <img className="img--logo" src={logo} alt="logo" />
 
-            <img className="img--profile" src={profile} alt="profile" />
+            </Link>
+            <Link to="/profile">
+                <img className="img--profile" src={profile} alt="profile" />
+            </Link>
+
         </div>
     );
 }

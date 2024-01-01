@@ -48,6 +48,7 @@ export default function NavBar() {
                         </NavLink>
 
                     </li>
+                    {/* News Out of project scope may delete later */}
                     {/* <li>
                         <NavLink
                             to={`News/`}
@@ -62,7 +63,8 @@ export default function NavBar() {
                             <img src={newsIcon} alt="news Icon" /><span>News</span>
                         </NavLink>
                     </li> */}
-                    <li>
+                    {/* moved responsibility to Admin/Service domain */}
+                    {/* <li>
                         <NavLink
                             to={`users/`}
                             className={({ isActive, isPending }) =>
@@ -75,7 +77,7 @@ export default function NavBar() {
                         >
                             <img src={usersIcon} alt="users Icon" /><span>Users</span>
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                         <NavLink
                             to={`requests/`}
@@ -95,7 +97,7 @@ export default function NavBar() {
 
             </nav>
             <div className="side--bottom">
-                {/* <div className="dark--mode">
+                <div className="dark--mode">
                     <img src={darkmodeIcon} style={{
                         height: '43px',
                         width: '43px'
@@ -108,11 +110,11 @@ export default function NavBar() {
                         className="custom"
                         icons={{
                             checked: "On",
-                            unchecked:"Off",
+                            unchecked: "Off",
                         }}
                         onChange={e => console.log("onToggle", e.target.checked)}
                     />
-                </div> */}
+                </div>
 
                 <div >
                     <button className="logout--button">

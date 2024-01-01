@@ -16,7 +16,6 @@ export async function action({ request }) {
     const obj = {
         announcementIDs: JSON.parse(data.first),
     }
-    console.log(obj);
 
     const announce = await a.delete('/support/deleteAnnouncements', {
         validateStatus: function (status) {
