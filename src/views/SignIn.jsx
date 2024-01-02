@@ -30,7 +30,7 @@ export async function action({ request }) {
         localStorage.setItem("user", user);
 
     } catch (error) {
-
+        console.log("AH FAAAAAAA");
     }
     return redirect("/");
 
@@ -63,6 +63,7 @@ export default function SignIn() {
                                 type="email"
                                 name="email"
                                 placeholder='Email'
+                                required
                             />
                             <input
                                 id="password"
@@ -71,6 +72,7 @@ export default function SignIn() {
                                 type="password"
                                 name="password"
                                 placeholder='Password'
+                                required
                             />
                             <button type='submit'>Sign in</button>
                         </Form>

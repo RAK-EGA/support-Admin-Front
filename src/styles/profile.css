@@ -1,0 +1,15 @@
+.profile--Info{
+
+}
+
+.profile--Info>div{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.profile--Info>div>input{
+    padding: 1rem;
+    width: 50%;
+}

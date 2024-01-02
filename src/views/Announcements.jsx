@@ -23,7 +23,7 @@ export async function loader({ request, params }) {
     // leave q alone
     const url = new URL(request.url);
     const q = url.searchParams.get("Announcements");
-    const regex = /^[A-Za-z\u0600-\u06FF0-9]*$/;
+    const regex = /^[A-Za-z\u0600-\u06FF0-9 ]*$/;
 
     const isValid = regex.test(q);
     // leave q alone end
