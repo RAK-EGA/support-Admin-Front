@@ -9,7 +9,7 @@ import {
 
 // let baseUrl = 'http://172.27.134.146:3000';
 
-let baseUrl = 'http://rakmun-api.rakega.online'
+let baseUrl = 'https://rakmun-api.rakega.online'
 
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
