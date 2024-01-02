@@ -1,8 +1,12 @@
-import { Outlet } from "react-router-dom";
+import {
+    Outlet,
+    useNavigation,
+} from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "../styles/root.css";
 import SideBar from "../components/SideBar";
 export default function Root() {
+    const navigation = useNavigation();
     return (
         <div id="page--layout">
             <NavBar />
@@ -10,11 +14,15 @@ export default function Root() {
                 <div id="sidebar">
                     <SideBar />
                 </div>
-                <div id="detail"> 
-                
-            
-                
-                <Outlet />
+                <div
+                    id="detail"
+                    className={
+                        navigation.state === "loading" ? "loading" : ""
+                    }>
+
+
+
+                    <Outlet />
 
                 </div>
 

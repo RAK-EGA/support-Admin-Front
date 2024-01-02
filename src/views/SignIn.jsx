@@ -1,18 +1,19 @@
 import axios from 'axios';
 import "../styles/login.css";
-
+import signInlogo from "../assets/signInlogo.png"
 import {
     Form, redirect,
 
 
 } from "react-router-dom"
 
-let baseUrl = 'http://172.27.134.146:3000';
+// let baseUrl = 'http://172.27.134.146:3000';
 
-
+let baseUrl = 'http://rakmun-api.rakega.online'
 
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
+
     try {
         const res = await axios({
             method: 'post',
@@ -47,6 +48,7 @@ export default function SignIn() {
     return (
         <>
             <div className="big">
+
             </div>
             <div className='login--image'>
                 <div className="form--container">
@@ -72,8 +74,13 @@ export default function SignIn() {
                             />
                             <button type='submit'>aaaa</button>
                         </Form>
+
                     </div>
+
                 </div>
+                <img src={signInlogo} className='RAK--logo' alt="RAK logo" />
+
+
             </div>
 
         </>
