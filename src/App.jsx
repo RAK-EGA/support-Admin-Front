@@ -39,14 +39,15 @@ import {
 } from "./views/DeleteAnnouncements"
 
 
-import Users, {
-  action as usersAction,
-  loader as usersLoader,
-} from "./views/User";
+// import Users, {
+//   action as usersAction,
+//   loader as usersLoader,
+// } from "./views/User";
 
-import {
-  action as deleteUsersAction,
-} from "./views/DeleteUsers"
+// import {
+//   action as deleteUsersAction,
+// } from "./views/DeleteUsers"
+
 import SignIn, {
   action as signInAction,
 } from "./views/SignIn";

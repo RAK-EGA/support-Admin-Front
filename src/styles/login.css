@@ -56,16 +56,45 @@
 
 }
 
-.form--items{
+.form--items {
     height: 100%;
     width: 100%;
+
+
+}
+
+.form--items>h6 {
+
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
     line-height: 60px;
 
     color: #6F5323;
+    text-align: center;
+}
 
+.form--items>form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.form--items>form>input {
+    border-radius: 10px;
+    width: 17rem;
+    padding: 1rem;
+}
+
+.form--items>form>button{
+    height: 2.5rem; 
+    width: 7rem;
+    background-color: #6F5323;
+    color: white;
 }
 
 .RAK--logo {

@@ -53,7 +53,7 @@ export default function SignIn() {
             <div className='login--image'>
                 <div className="form--container">
                     <div className="form--items">
-                        <h6>SIGN IN</h6>
+                        <h6>Sign in</h6>
 
                         <Form method='post'>
                             <input
@@ -70,9 +70,9 @@ export default function SignIn() {
                                 aria-label={`password`}
                                 type="password"
                                 name="password"
-                                placeholder='password'
+                                placeholder='Password'
                             />
-                            <button type='submit'>aaaa</button>
+                            <button type='submit'>Sign in</button>
                         </Form>
 
                     </div>
