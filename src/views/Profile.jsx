@@ -1,33 +1,97 @@
 import Header from "../components/Header";
+import { patch } from "../helper functions/helperFunctions";
 import "../styles/profile.css"
 
+import {
+
+    Form,
+
+
+} from "react-router-dom"
+
+
+
+
+
+export async function action({ request }) {
+    const data = Object.fromEntries(await request.formData());
+
+    if (data.password !== data.confirmPassword) {
+        // maybe do all validation here and display wrong message using toastify when we get to it
+        // for now alert works
+        alert("both passwords must be equivilant");
+        return false;
+    }
+
+    const [res, error] = await patch("/support/changepassword", data);
+
+    if (error) {
+        throw error;
+    }
+    alert("password changed succesfully")
+    return 1;
+
+}
+
+
 export default function Profile() {
+    const { user } = JSON.parse(localStorage.getItem("user"));
+    let keys = [];
+    for (let key in user) {
+        keys.push(key);
+    }
+    const info = keys.map((key) => {
+        if (key != 'password' && key != '__v' && key != 'updatedAt' && key != "_id" && key != "createdAt") {
+            return (
+                <div key={key} >
+                    <div className="profile--feild">
+                        <label className="profile--label" htmlFor={key}>{key}</label>
+                        <input className="faded profile--input" type="text" name={key} id={key} disabled defaultValue={user[key]} />
+
+                    </div>
+                </div >
+
+            );
+        };
+    });
     return (
         <>
             <Header name="MY PROFILE" allowSearch={false} />
 
             <div className="display--elements" style={{
-                overflowY: "visible"
+                padding: "3rem",
             }}>
 
                 <div className="profile--Info">
-                    <div>
-                        <label htmlFor="name">Name</label>
-                        <input type="text" name="name" id="name" disabled />
 
-                    </div>
-                    <div>
-                        <label htmlFor="email-profile">Email</label>
-                        <input type="text" name="email-profile" id="email-profile" disabled />
+                    {info}
 
-                    </div>
-                    <div>
-                        <label htmlFor="Department">Department</label>
-                        <input type="text" name="Department" id="Department" disabled />
-                    </div>
+                    <Form method="post" className="profile--form">
+
+                        <div className="profile--feild">
+                            <label htmlFor="password" className="profile--label">Password</label>
+
+                            <input type="password" className="profile--input" required name="password" id="password" />
+
+                        </div>
+                        <div className="profile--feild">
+                            <label htmlFor="passwordConfirm" className="profile--label">Confirm Password </label>
+
+                            <input type="password" className="profile--input" required name="confirmPassword" id="passwordConfirm" />
+
+                        </div>
+
+
+
+                        <button className="save--button profile--button" type="submit">Save</button>
+
+                    </Form>
+
 
                 </div>
-            </div>
+
+
+            </div >
         </>
     );
 }

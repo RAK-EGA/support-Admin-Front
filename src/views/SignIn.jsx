@@ -7,9 +7,9 @@ import {
 
 } from "react-router-dom"
 
-// let baseUrl = 'http://172.27.134.146:3000';
+let baseUrl = 'http://172.27.134.146:3000';
 
-let baseUrl = 'https://rakmun-api.rakega.online'
+// let baseUrl = 'https://rakmun-api.rakega.online'
 
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
@@ -30,7 +30,7 @@ export async function action({ request }) {
         localStorage.setItem("user", user);
 
     } catch (error) {
-        console.log("AH FAAAAAAA");
+
     }
     return redirect("/");
 

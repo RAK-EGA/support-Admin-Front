@@ -55,7 +55,9 @@ import EditAnnouncement, {
   loader as editAnnouncementLoader,
   action as editAnnouncementAction,
 } from "./views/EditAnnouncement";
-import Profile from "./views/Profile";
+import Profile, {
+  action as editProfileAction,
+} from "./views/Profile";
 
 
 const router = createBrowserRouter(
@@ -126,7 +128,7 @@ const router = createBrowserRouter(
           <Route
             path="profile/"
             element={<Profile />}
-          // action={editAnnouncementAction}
+            action={editProfileAction}
           // loader={editAnnouncementLoader}
           />
 

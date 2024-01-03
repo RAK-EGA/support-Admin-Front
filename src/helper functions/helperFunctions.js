@@ -120,6 +120,7 @@ export async function deletereq(path, data) {
     }
 
     const axiosClient = instance(user.accessToken);
+
     try {
 
         const response = await axiosClient.delete(path, data, {
@@ -129,6 +130,31 @@ export async function deletereq(path, data) {
 
             }
         })
+        //check status when calling to make sure its not 401 
+        return [response, null];
+
+    } catch (error) {
+        return [null, error];
+    }
+}
+
+export async function patch(path, data) {
+    // may refactor these to handle auth logic in a ceperate component and check every time he moves for token too
+    const user = checkIfSignedIn();
+
+    if (user === null) {
+
+        const response = {
+            status: 401,
+        };
+        return [response, null];
+    }
+
+    const axiosClient = instance(user.accessToken);
+
+    try {
+
+        const response = await axiosClient.patch(path,data);
         //check status when calling to make sure its not 401 
         return [response, null];
 
