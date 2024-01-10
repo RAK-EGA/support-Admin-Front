@@ -58,58 +58,59 @@ import EditAnnouncement, {
 import Profile, {
   action as editProfileAction,
 } from "./views/Profile";
+import Auth from "./components/Auth";
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<ErrorPage />}
     >
+      <Route element={<Auth />}>
+        <Route
+          path="/"
+          element={<Root />}
+          errorElement={<ErrorPage />}
+        >
+          <Route errorElement={<ErrorPage />}>
+            <Route index element={<Index />} />
+            <Route
+              path="tickets/"
+              element={<Tickets />}
+              loader={ticketsLoader}
+            // action={} when going to specific
+            />
+            <Route
+              path="requests/"
+              element={<Requests />}
+              loader={requestsLoader}
+            // action={}
+            />
+            <Route
+              path="tickets/:ticketId"
+              element={<Ticket />}
+              loader={ticketLoader}
+              action={ticketAction}
+            />
+            <Route
+              path="requests/:requestId"
+              element={<Request />}
+              loader={requestLoader}
+              action={requestAction}
+            />
 
-      <Route
-        path="/"
-        element={<Root />}
-        errorElement={<ErrorPage />}
-      >
-        <Route errorElement={<ErrorPage />}>
-          <Route index element={<Index />} />
-          <Route
-            path="tickets/"
-            element={<Tickets />}
-            loader={ticketsLoader}
-          // action={} when going to specific
-          />
-          <Route
-            path="requests/"
-            element={<Requests />}
-            loader={requestsLoader}
-          // action={}
-          />
-          <Route
-            path="tickets/:ticketId"
-            element={<Ticket />}
-            loader={ticketLoader}
-            action={ticketAction}
-          />
-          <Route
-            path="requests/:requestId"
-            element={<Request />}
-            loader={requestLoader}
-            action={requestAction}
-          />
+            <Route
+              path="announcements/"
+              element={<Announcements />}
+              loader={announcementsLoader}
+              action={announcementsAction}
 
-          <Route
-            path="announcements/"
-            element={<Announcements />}
-            loader={announcementsLoader}
-            action={announcementsAction}
-
-          />
-          <Route
-            path="announcements/delete"
-            action={deleteAnnouncementsAction}
-          />
-          {/* moved responsibility to Admin/Service domain */}
-          {/* <Route
+            />
+            <Route
+              path="announcements/delete"
+              action={deleteAnnouncementsAction}
+            />
+            {/* moved responsibility to Admin/Service domain */}
+            {/* <Route
             path="users/"
             element={<Users />}
             action={usersAction}
@@ -119,22 +120,25 @@ const router = createBrowserRouter(
             path="users/delete"
             action={deleteUsersAction}
           /> */}
-          <Route
-            path="announcements/:id/:intent"
-            element={<EditAnnouncement />}
-            action={editAnnouncementAction}
-            loader={editAnnouncementLoader}
-          />
-          <Route
-            path="profile/"
-            element={<Profile />}
-            action={editProfileAction}
-          // loader={editAnnouncementLoader}
-          />
+            <Route
+              path="announcements/:id/:intent"
+              element={<EditAnnouncement />}
+              action={editAnnouncementAction}
+              loader={editAnnouncementLoader}
+            />
+            <Route
+              path="profile/"
+              element={<Profile />}
+              action={editProfileAction}
+            // loader={editAnnouncementLoader}
+            />
 
 
+          </Route>
         </Route>
+
       </Route>
+
       <Route
         path="signIn/"
         element={<SignIn />}

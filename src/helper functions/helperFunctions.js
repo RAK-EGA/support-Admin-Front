@@ -1,6 +1,6 @@
-import SignIn, { instance } from "../views/SignIn";
+import { instance } from "../views/SignIn";
 
-
+// refracter those because u dont need to check if its autherized or no any more or if user logged in or no
 
 function checkIfSignedIn() {
     const user = localStorage.getItem("user");

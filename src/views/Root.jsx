@@ -5,8 +5,11 @@ import {
 import NavBar from "../components/NavBar";
 import "../styles/root.css";
 import SideBar from "../components/SideBar";
+import { useSelector } from "react-redux";
 export default function Root() {
     const navigation = useNavigation();
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const classname = isDarkmode ? "dark--primary" : "light--primary"
     return (
         <div id="page--layout">
             <NavBar />
@@ -17,7 +20,7 @@ export default function Root() {
                 <div
                     id="detail"
                     className={
-                        navigation.state === "loading" ? "loading" : ""
+                        navigation.state === "loading" ? `loading ${classname}` : classname
                     }>
 
 
