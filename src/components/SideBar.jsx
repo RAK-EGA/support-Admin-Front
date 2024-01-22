@@ -41,8 +41,83 @@ export default function NavBar() {
                                         : ""
                             }
                         >
-                            <img src={casesIcon} alt="cases Icon" /><span>Tickets</span>
+                            <img src={casesIcon} alt="cases Icon" /><span>Unviewed Tickets</span>
 
+                        </NavLink>
+                    </li>
+                    <li>
+                        {/* <Link to={}/> */}
+                        <NavLink
+                            to={`AcceptedTickets/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={casesIcon} alt="cases Icon" /><span>Accepted Tickets</span>
+
+                        </NavLink>
+                    </li>
+                    <li>
+                        {/* <Link to={}/> */}
+                        <NavLink
+                            to={`TicketsHistory/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={casesIcon} alt="cases Icon" /><span>Tickets History</span>
+
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink
+                            to={`requests/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={permitsIcon} alt="pernits Icon" /><span>Unviewed Requests</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to={`AcceptedRequests/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={permitsIcon} alt="pernits Icon" /><span>Accepted Requests</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to={`RequestsHistory/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={permitsIcon} alt="pernits Icon" /><span>Requests History</span>
                         </NavLink>
                     </li>
                     <li>
@@ -59,50 +134,6 @@ export default function NavBar() {
                             <img src={announcementsIcon} alt="announcements Icon" /><span>Announcements</span>
                         </NavLink>
 
-                    </li>
-                    {/* News Out of project scope may delete later */}
-                    {/* <li>
-                        <NavLink
-                            to={`News/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? "active"
-                                    : isPending
-                                        ? "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={newsIcon} alt="news Icon" /><span>News</span>
-                        </NavLink>
-                    </li> */}
-                    {/* moved responsibility to Admin/Service domain */}
-                    {/* <li>
-                        <NavLink
-                            to={`users/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? "active"
-                                    : isPending
-                                        ? "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={usersIcon} alt="users Icon" /><span>Users</span>
-                        </NavLink>
-                    </li> */}
-                    <li>
-                        <NavLink
-                            to={`requests/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? isDarkmode ? "active-dark" : "active"
-                                    : isPending
-                                        ? isDarkmode ? "pending-dark" : "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={permitsIcon} alt="pernits Icon" /><span>Requests</span>
-                        </NavLink>
                     </li>
 
                 </ul>

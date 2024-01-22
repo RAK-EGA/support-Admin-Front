@@ -53,7 +53,7 @@
     /* align-items: center; */
     /* justify-content: center; */
     width: 25%;
-    min-width: 229px;
+    min-width: 240px;
     min-height: 740px;
     height: 100%;
     margin-top: 10px;
@@ -584,4 +584,30 @@ button:active {
 
 .dark--secondery {
     background-color: #d2c7ad5b;
+}
+
+.buttons--holder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+
+}
+
+.button {
+    height: 27px;
+    width: 80px;
+    background: #9D855C;
+    border-radius: 6px;
+    border-color: #9D855C;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
 }

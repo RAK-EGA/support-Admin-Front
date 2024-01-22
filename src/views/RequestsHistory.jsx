@@ -1,27 +1,25 @@
-
 import {
     Link,
     useLoaderData,
-
-
+    useNavigation,
 } from "react-router-dom"
 import { useSelector } from "react-redux";
 
-
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
+import { useEffect } from "react";
 
 // spinner should work test it out when apis are made
-export async function loader() {
-
-    // make api call to get tickets here they com,e filtered show only
-
-    const createTickets = () => {
+export async function loader({ request }) {
+    const url = new URL(request.url);
+    const q = url.searchParams.get("Requests History");
+    console.log(`here is your query I will filter the Requests with it eventually I promise
+    q = ${q}`);
+    // make api call to get requests  here they com,e filtered show only
+    const createRequests = () => {
         const reqs = []
         for (let i = 1; i < 11; i++) {
-
             const rand = Math.floor(Math.random() * 3) + 1
-
             reqs.push(
                 {
                     id: `${i}`,
@@ -31,16 +29,17 @@ export async function loader() {
                     status: rand == 1 ? "opened" : rand == 2 ? "proccessing" : "closed",
                     // add data here for tickets
                 },
+
             );
+
         }
         return reqs;
     };
-    const tickets = createTickets();
-    return { tickets };
+    const requests = createRequests();
+    return { q, requests };
 }
 
 
-// use this when heading to view a specific ticket
 // export async function action() {
 //     const contact = await createContact();
 //     return redirect(`/contacts/${contact.id}/edit`);
@@ -48,44 +47,43 @@ export async function loader() {
 
 
 
-export default function Tickets() {
-
-    const { tickets } = useLoaderData();
+export default function Requests() {
+    const { q, requests } = useLoaderData();
+    const navigation = useNavigation();
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--primary light--gray" : "";
-
-    const Items = tickets.map((ticket) => {
+    const Items = requests.map((request) => {
         return (
+
             <Link
-                to={`${ticket.id}`}
-                key={ticket.id}
+                to={`${request.id}`}
+                key={request.id}
 
             >
-                <ListItem item={ticket} />
+                <ListItem item={request} />
             </Link>
+
         );
 
     });
 
-    // const searching =
-    //     navigation.location &&
-    //     new URLSearchParams(navigation.location.search).has(
-    //         "Tickets"
-    //     );
+    const searching =
+        navigation.location &&
+        new URLSearchParams(navigation.location.search).has(
+            "Requests History"
+        );
 
-    // useEffect(() => {
-    //     document.getElementById("Tickets").value = q;
-    // }, [q]);
+    useEffect(() => {
+        document.getElementById("Requests History").value = q;
+    }, [q]);
 
     return (
+
         <>
-            {/* <Header name={"Tickets"} searching={searching} q={q}  /> */}
-            <Header name={"Unviewed Tickets"} allowSearch={false} />
+            <Header name={"Requests History"} searching={searching} q={q} />
 
 
-            {/* make this a component */}
             <div className={`display--elements ${className}`}>
-                {/* map to tickets here with a component  */}
                 {Items}
 
             </div>
@@ -94,6 +92,7 @@ export default function Tickets() {
 
 
         </>
+
 
     );
 }

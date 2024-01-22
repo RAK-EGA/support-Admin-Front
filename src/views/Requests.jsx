@@ -1,7 +1,6 @@
 import {
     Link,
     useLoaderData,
-    useNavigation,
 
 
 } from "react-router-dom"
@@ -9,14 +8,10 @@ import { useSelector } from "react-redux";
 
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
-import { useEffect } from "react";
 
 // spinner should work test it out when apis are made
-export async function loader({ request }) {
-    const url = new URL(request.url);
-    const q = url.searchParams.get("Requests");
-    console.log(`here is your query I will filter the Requests with it eventually I promise
-    q = ${q}`);
+export async function loader() {
+
     // make api call to get requests  here they com,e filtered show only
     const createRequests = () => {
         const reqs = []
@@ -38,20 +33,15 @@ export async function loader({ request }) {
         return reqs;
     };
     const requests = createRequests();
-    return { q, requests };
+    return { requests };
 }
 
 
-// export async function action() {
-//     const contact = await createContact();
-//     return redirect(`/contacts/${contact.id}/edit`);
-// }
 
 
 
 export default function Requests() {
-    const { q, requests } = useLoaderData();
-    const navigation = useNavigation();
+    const { requests } = useLoaderData();
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--primary light--gray" : "";
     const Items = requests.map((request) => {
@@ -69,21 +59,12 @@ export default function Requests() {
 
     });
 
-    // const searching =
-    //     navigation.location &&
-    //     new URLSearchParams(navigation.location.search).has(
-    //         "Requests"
-    //     );
 
-    // useEffect(() => {
-    //     document.getElementById("Requests").value = q;
-    // }, [q]);
 
     return (
 
         <>
-            {/* <Header name={"Requests"} searching={searching} q={q} /> */}
-            <Header name={"Requests"} allowSearch={false} />
+            <Header name={"Unviewed Requests"} allowSearch={false} />
 
 
             <div className={`display--elements ${className}`}>

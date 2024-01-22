@@ -31,16 +31,18 @@
     height: 100%;
     width: 80%;
     padding: 2rem;
-    
+
 }
-.media--holder{
+
+.media--holder {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
 }
-.media--holder{
+
+.media--holder {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,4 +78,10 @@ button {
 .button-default {
     background: #247BA0;
     color: #fff;
+}
+
+.third-party--holder {
+    height: 100%;
+    width: 100%;
+    
 }

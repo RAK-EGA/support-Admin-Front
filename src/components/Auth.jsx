@@ -16,7 +16,7 @@ export default function Auth() {
     useEffect(() => {
         let interval = setInterval(() => {
             if (isAuth) {
-                // call api to refresh every 30
+                // call api to refresh every 30min
             }
         }, 2000);
         return () => clearInterval(interval);

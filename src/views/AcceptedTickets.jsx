@@ -3,7 +3,6 @@ import {
     Link,
     useLoaderData,
 
-
 } from "react-router-dom"
 import { useSelector } from "react-redux";
 
@@ -48,7 +47,7 @@ export async function loader() {
 
 
 
-export default function Tickets() {
+export default function AcceptedTickets() {
 
     const { tickets } = useLoaderData();
     const isDarkmode = useSelector((state) => state.darkmode.value);
@@ -80,7 +79,7 @@ export default function Tickets() {
     return (
         <>
             {/* <Header name={"Tickets"} searching={searching} q={q}  /> */}
-            <Header name={"Unviewed Tickets"} allowSearch={false} />
+            <Header name={"Accepted Tickets"} allowSearch={false} />
 
 
             {/* make this a component */}

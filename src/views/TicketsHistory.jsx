@@ -2,18 +2,22 @@
 import {
     Link,
     useLoaderData,
-
-
+    useNavigation,
+    
 } from "react-router-dom"
 import { useSelector } from "react-redux";
 
 
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
+import { useEffect } from "react";
 
 // spinner should work test it out when apis are made
-export async function loader() {
-
+export async function loader({ request }) {
+    const url = new URL(request.url);
+    const q = url.searchParams.get("Tickets History");
+    console.log(`here is your query I will filter the tickets with it eventually I promise
+    q = ${q}`);
     // make api call to get tickets here they com,e filtered show only
 
     const createTickets = () => {
@@ -36,7 +40,7 @@ export async function loader() {
         return reqs;
     };
     const tickets = createTickets();
-    return { tickets };
+    return { q, tickets };
 }
 
 
@@ -50,7 +54,8 @@ export async function loader() {
 
 export default function Tickets() {
 
-    const { tickets } = useLoaderData();
+    const { q, tickets } = useLoaderData();
+    const navigation = useNavigation();
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--primary light--gray" : "";
 
@@ -67,20 +72,19 @@ export default function Tickets() {
 
     });
 
-    // const searching =
-    //     navigation.location &&
-    //     new URLSearchParams(navigation.location.search).has(
-    //         "Tickets"
-    //     );
+    const searching =
+        navigation.location &&
+        new URLSearchParams(navigation.location.search).has(
+            "Tickets History"
+        );
 
-    // useEffect(() => {
-    //     document.getElementById("Tickets").value = q;
-    // }, [q]);
+    useEffect(() => {
+        document.getElementById("Tickets History").value = q;
+    }, [q]);
 
     return (
         <>
-            {/* <Header name={"Tickets"} searching={searching} q={q}  /> */}
-            <Header name={"Unviewed Tickets"} allowSearch={false} />
+            <Header name={"Tickets History"} searching={searching} q={q}  />
 
 
             {/* make this a component */}
