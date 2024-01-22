@@ -4,20 +4,17 @@ import {
     useNavigation,
     Form,
     redirect,
-
-
 } from "react-router-dom"
-
+import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 
 import "../styles/announcements.css"
-
 import { post } from "../helper functions/helperFunctions";
 // spinner should work test it out when apis are made
 
 
-export async function loader({ request, params }) {
+export async function loader({ request, }) {
     // throw 1;
 
     // leave q alone
@@ -70,7 +67,7 @@ export async function loader({ request, params }) {
 
     // wont be null If being redirected
     const status = url.searchParams.get("status");
-    
+
 
 
     return { q, announcements, mess, status };
@@ -88,7 +85,8 @@ export async function action() {
 export default function Announcements() {
     const [selectedIds, setSelected] = useState([]);
     const { q, announcements, mess, status } = useLoaderData();
-
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const className = isDarkmode ? "dark--first" : "";
     const navigation = useNavigation();
     function handleChange(id) {
         if (selectedIds.indexOf(id) == -1) {
@@ -117,7 +115,7 @@ export default function Announcements() {
             >
 
                 {/* this changes */}
-                <div className="announcement">
+                <div className={`announcement ${className}`}>
                     <input type="checkbox" name="" id=""
                         onChange={() => {
                             handleChange(announcement._id);
@@ -130,16 +128,16 @@ export default function Announcements() {
                         }}
 
                     >
-                        <div className="announcement--info">
-                            <h6>{announcement.title}</h6>
-                            <p>{announcement.body}</p>
+                        <div className={`announcement--info`}>
+                            <h6 className={className}>{announcement.title}</h6>
+                            <p className={className}>{announcement.body}</p>
 
                         </div>
                     </Link>
 
                 </div>
 
-            </div >
+            </div>
 
         );
 

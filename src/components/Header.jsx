@@ -1,23 +1,24 @@
-import { useState } from "react";
 import {
     Form,
     useSubmit,
 
 } from "react-router-dom"
+import { useSelector } from "react-redux";
 
-export default function Header({ name, searching = false, q = '', allowSearch = true, mess=null }) {
+export default function Header({ name, searching = false, q = '', allowSearch = true, mess = null }) {
 
     const submit = useSubmit();
-
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const className = isDarkmode ? "dark--first" : "";
     return (
 
         <div className="items--header"><span>{name}</span>
             {
                 allowSearch && <Form id="search-form" role="search">
-                    {mess? <div className="error--message">{mess}</div>:null}
+                    {mess ? <div className="error--message">{mess}</div> : null}
                     <input
                         id={name}
-                        className={searching ? "loading" : ""}
+                        className={searching ? "loading" + className : "" + className}
                         aria-label={`Search ${name}`}
                         type="search"
                         name={name}

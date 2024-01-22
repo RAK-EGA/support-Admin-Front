@@ -7,9 +7,9 @@ import {
 
 } from "react-router-dom"
 
-let baseUrl = 'http://172.27.134.146:3000';
+// let baseUrl = 'http://172.27.134.146:3000';
 
-// let baseUrl = 'https://rakmun-api.rakega.online'
+let baseUrl = 'https://rakmun-api.rakega.online'
 
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
@@ -30,7 +30,7 @@ export async function action({ request }) {
         localStorage.setItem("user", user);
 
     } catch (error) {
-
+        console.log(error);
     }
     return redirect("/");
 
@@ -53,7 +53,7 @@ export default function SignIn() {
             <div className='login--image'>
                 <div className="form--container">
                     <div className="form--items">
-                        <h6>Sign in</h6>
+                        <h6>SING IN</h6>
 
                         <Form method='post'>
                             <input

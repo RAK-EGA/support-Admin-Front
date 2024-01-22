@@ -6,6 +6,8 @@ import {
 
 
 } from "react-router-dom"
+import { useSelector } from "react-redux";
+
 
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
@@ -23,7 +25,7 @@ export async function loader({ request }) {
         const reqs = []
         for (let i = 1; i < 11; i++) {
 
-            const rand = Math.floor(Math.random()*3)+1
+            const rand = Math.floor(Math.random() * 3) + 1
 
             reqs.push(
                 {
@@ -31,7 +33,7 @@ export async function loader({ request }) {
                     category: 'garbage',
                     location: 'RAK',
                     date: '18/12/2023',
-                    status: rand==1?"opened": rand==2?"proccessing": "closed",
+                    status: rand == 1 ? "opened" : rand == 2 ? "proccessing" : "closed",
                     // add data here for tickets
                 },
             );
@@ -55,6 +57,8 @@ export default function Tickets() {
 
     const { q, tickets } = useLoaderData();
     const navigation = useNavigation();
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const className = isDarkmode ? "dark--primary light--gray" : "";
 
     const Items = tickets.map((ticket) => {
         return (
@@ -63,7 +67,7 @@ export default function Tickets() {
                 key={ticket.id}
 
             >
-                <ListItem  item={ticket} />
+                <ListItem item={ticket} />
             </Link>
         );
 
@@ -85,7 +89,7 @@ export default function Tickets() {
 
 
             {/* make this a component */}
-            <div className="display--elements">
+            <div className={`display--elements ${className}`}>
                 {/* map to tickets here with a component  */}
                 {Items}
 

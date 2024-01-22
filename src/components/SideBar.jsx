@@ -19,7 +19,7 @@ export default function NavBar() {
     const dispatch = useDispatch();
     const className = isDarkmode ? "side--bar-dark " : "side--bar-light";
     useEffect(() => {
-        document.body.style.backgroundColor = isDarkmode ? '#d2c7ad5b' : '#F3F1EA';
+        document.body.style.backgroundColor = isDarkmode ? 'rgb(0 0 0 / 36%)' : '#F3F1EA';
         /* Side Nav */
 
         // box-shadow: 8px 4px 4.6px rgba(210, 199, 173, 0.25);

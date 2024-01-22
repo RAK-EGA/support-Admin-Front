@@ -34,7 +34,7 @@
 
 .faded {
 
-    background: rgba(133, 133, 133, 0.4);
+    background: rgba(133, 133, 133, 0.4) !important;
 }
 
 .profile--form {

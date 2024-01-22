@@ -1,21 +1,26 @@
-export default function ListItem({item}) {
-    const color = item.status==="closed"?"green":item.status==="opened"?"red":"gray" 
-    const pointFill = color=="green"?"#007F00":color=="red"?"#D30000":"#767676"
+import { useSelector } from "react-redux";
+
+export default function ListItem({ item }) {
+    const color = item.status === "closed" ? "green" : item.status === "opened" ? "red" : "gray"
+    const pointFill = color == "green" ? "#007F00" : color == "red" ? "#D30000" : "#767676"
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const className = isDarkmode ? "light--gray" : "";
+
     return (
 
         <div className="item--container">
             <div className="item--info">
                 <div className="item--id">
-                    <span>{item.id}</span>
+                    <span className={className}>{item.id}</span>
                 </div>
                 <div className="item--category">
-                    <span>Category: {item.category}</span>
-                    <span>Location: {item.location}</span>
+                    <span className={className}>Category: {item.category}</span>
+                    <span className={className}>Location: {item.location}</span>
                 </div>
             </div>
             <div className="item--date">
-                <span>Issued on</span>
-                <span>{item.date}</span>
+                <span className={className}>Issued on</span>
+                <span className={className}>{item.date}</span>
             </div>
             <div className="item--status">
                 {/* i dont know maybe look for an icont I instead? OR just keep it and change the fill Color so that it changes with status */}

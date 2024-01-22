@@ -1,11 +1,11 @@
 import {
     Form,
     useLoaderData,
-    useNavigation,
     useSubmit,
 
 
 } from "react-router-dom"
+import { useSelector } from "react-redux";
 
 import Modal from "../components/Modal";
 import useModal from "../customHooks/useModal";
@@ -55,16 +55,18 @@ export async function action({ request, params }) {
 export default function Request() {
     const { request } = useLoaderData();
     const { isShowing, toggle, fileInfo, setInfo } = useModal();
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const className = isDarkmode ? "dark--primary light--gray" : "";
     const submit = useSubmit();
 
     let keys = [];
     for (let key in request) {
-        if (request.hasOwnProperty(key)) keys.push(key);
+        keys.push(key);
     }
     const info = keys.map((key) => {
         if (key != 'id' && key != 'Attachments' && key != 'status') {
             return (
-                <span key={key}>{key}: {request[key]}</span>
+                <span className={className} key={key}>{key}: {request[key]}</span>
             );
         }
     });
@@ -121,11 +123,11 @@ export default function Request() {
 
 
             {/* make this a component */}
-            <div className="display--elements">
+            <div className={`display--elements ${className}`}>
                 {/* map to tickets here with a component  */}
                 <div className="ticket--info">
                     {info}
-                    <div style={{
+                    <div className={className} style={{
                         display: 'flex',
                         gap: '1rem',
                     }}>
@@ -133,7 +135,7 @@ export default function Request() {
                     </div> {
                         request.hasOwnProperty("Attachments") &&
                         <>
-                            <span>Attachments:</span>
+                            <span className={className}>Attachments:</span>
                             <div className="attachments--holder">
                                 {Attachments}
                             </div>

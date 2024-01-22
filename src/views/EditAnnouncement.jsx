@@ -8,6 +8,9 @@ import {
 
 } from "react-router-dom"
 
+import { useSelector } from "react-redux";
+
+
 
 export async function loader({ params }) {
     // throw 1;
@@ -85,12 +88,15 @@ export async function action({ request }) {
 
 export default function EditAnnouncement() {
     const { announcement, intent } = useLoaderData();
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const className = isDarkmode ? "dark--primary light--gray" : "";
+    const textareaClassName = isDarkmode ? "dark--first light--gray" : "";
     return (
 
         <>
             <Header name={intent == "create" ? "Create Announcement" : "Edit Announcement"} allowSearch={false} />
 
-            <div className="display--elements">
+            <div className={`display--elements ${className}`}>
                 <div className="edit--form">
                     <Form method="post">
 
@@ -109,10 +115,10 @@ export default function EditAnnouncement() {
                             hidden={true}
                             value={announcement._id}
                         />
-                        <label htmlFor="title">Title</label>
-                        <textarea name="title" id="title" rows="2" defaultValue={announcement.title} required></textarea>
-                        <label htmlFor="body">Body</label>
-                        <textarea name="body" id="body" rows="8" defaultValue={announcement.body} required></textarea>
+                        <label className={className} htmlFor="title">Title</label>
+                        <textarea className={textareaClassName} name="title" id="title" rows="2" defaultValue={announcement.title} required></textarea>
+                        <label className={className} htmlFor="body">Body</label>
+                        <textarea className={textareaClassName} name="body" id="body" rows="8" defaultValue={announcement.body} required></textarea>
 
                         <button className="save--button" type="submit">Save</button>
 

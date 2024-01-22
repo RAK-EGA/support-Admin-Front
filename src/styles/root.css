@@ -573,8 +573,13 @@ button:active {
     background: #1C1C1C;
     /* Drop Shadow */
     box-shadow: 5px 5px 35.1564px #000000;
-    
 
+
+}
+
+.dark--first {
+    background-color: #000000 !important;
+    color: #898989 !important;
 }
 
 .dark--secondery {

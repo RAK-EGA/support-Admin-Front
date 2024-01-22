@@ -9,6 +9,7 @@ import useModal from "../customHooks/useModal";
 
 import imgIcon from "../assets/imgIcon.png";
 import Header from "../components/Header";
+import { useSelector } from "react-redux";
 
 
 // spinner should work test it out when apis are made
@@ -23,7 +24,7 @@ export async function loader({ params }) {
         location: 'RAK',
         issueDate: '18/12/2023',
         status: "resolved",
-        Attachments: ["https://www.epicnonsense.com/wp-content/uploads/2013/05/d153805f768c94a3006d630caab0e178.jpg", "https://www.pio.gov.cy/coronavirus/uploads/Lorem_ipsum.pdf","https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"],
+        Attachments: ["https://www.epicnonsense.com/wp-content/uploads/2013/05/d153805f768c94a3006d630caab0e178.jpg", "https://www.pio.gov.cy/coronavirus/uploads/Lorem_ipsum.pdf", "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"],
         // add data here for tickets
     }
     if (!ticket) {
@@ -57,16 +58,19 @@ export default function Ticket() {
     const { ticket } = useLoaderData();
     const { isShowing, toggle, fileInfo, setInfo } = useModal();
 
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const className = isDarkmode ? "dark--primary light--gray" : "";
+
     const submit = useSubmit();
 
     let keys = [];
     for (let key in ticket) {
-        if (ticket.hasOwnProperty(key)) keys.push(key);
+        keys.push(key);
     }
     const info = keys.map((key) => {
         if (key != 'id' && key != 'Attachments' && key != 'status') {
             return (
-                <span key={key}>{key}: {ticket[key]}</span>
+                <span className={className} key={key}>{key}: {ticket[key]}</span>
             );
         }
     });
@@ -96,7 +100,7 @@ export default function Ticket() {
                 <div
                     className="attachment"
                     onClick={() => {
-                        setInfo(type,a);
+                        setInfo(type, a);
                         toggle();
                     }}
                 >
@@ -122,11 +126,11 @@ export default function Ticket() {
 
 
             {/* make this a component */}
-            <div className="display--elements">
+            <div className={`display--elements ${className}`}>
                 {/* map to tickets here with a component  */}
                 <div className="ticket--info">
                     {info}
-                    <div style={{
+                    <div className={className} style={{
                         display: 'flex',
                         gap: '1rem',
                     }}>
@@ -134,7 +138,7 @@ export default function Ticket() {
                     </div> {
                         ticket.hasOwnProperty("Attachments") &&
                         <>
-                            <span>Attachments:</span>
+                            <span className={className}>Attachments:</span>
                             <div className="attachments--holder">
                                 {Attachments}
                             </div>
