@@ -69,20 +69,21 @@ export default function Requests() {
 
     });
 
-    const searching =
-        navigation.location &&
-        new URLSearchParams(navigation.location.search).has(
-            "Requests"
-        );
+    // const searching =
+    //     navigation.location &&
+    //     new URLSearchParams(navigation.location.search).has(
+    //         "Requests"
+    //     );
 
-    useEffect(() => {
-        document.getElementById("Requests").value = q;
-    }, [q]);
+    // useEffect(() => {
+    //     document.getElementById("Requests").value = q;
+    // }, [q]);
 
     return (
 
         <>
-            <Header name={"Requests"} searching={searching} q={q} />
+            {/* <Header name={"Requests"} searching={searching} q={q} /> */}
+            <Header name={"Requests"} allowSearch={false} />
 
 
             <div className={`display--elements ${className}`}>

@@ -73,19 +73,20 @@ export default function Tickets() {
 
     });
 
-    const searching =
-        navigation.location &&
-        new URLSearchParams(navigation.location.search).has(
-            "Tickets"
-        );
+    // const searching =
+    //     navigation.location &&
+    //     new URLSearchParams(navigation.location.search).has(
+    //         "Tickets"
+    //     );
 
-    useEffect(() => {
-        document.getElementById("Tickets").value = q;
-    }, [q]);
+    // useEffect(() => {
+    //     document.getElementById("Tickets").value = q;
+    // }, [q]);
 
     return (
         <>
-            <Header name={"Tickets"} searching={searching} q={q} />
+            {/* <Header name={"Tickets"} searching={searching} q={q}  /> */}
+            <Header name={"Tickets"} allowSearch={false} />
 
 
             {/* make this a component */}

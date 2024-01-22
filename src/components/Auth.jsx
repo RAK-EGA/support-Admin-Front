@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 const useAuth = () => {
     const user = localStorage.getItem("user");
@@ -12,6 +12,17 @@ const useAuth = () => {
 
 export default function Auth() {
     const isAuth = useAuth()
-   
-    return isAuth ? <Outlet /> : <div>usenavigate to go to signin</div>;
+
+    useEffect(() => {
+        let interval = setInterval(() => {
+            if (isAuth) {
+                // call api to refresh every 30
+            }
+        }, 2000);
+        return () => clearInterval(interval);
+// add auth token to be here  and i can add a state make it change when ever it changes but I will have to make it global
+// since iam using redux i will use that and just have fun instead
+    }, []);
+
+    return isAuth ? <Outlet /> : <Navigate to="signIn" />;
 }

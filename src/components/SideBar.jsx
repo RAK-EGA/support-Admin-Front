@@ -1,5 +1,4 @@
 import casesIcon from "../assets/casesIcon.png"
-import logoutIcont from "../assets/Logout.png"
 import darkmodeIcon from "../assets/darkmodeIcon.png"
 import announcementsIcon from "../assets/anouncementsIcon.png"
 
@@ -126,7 +125,7 @@ export default function NavBar() {
                             checked: "On",
                             unchecked: "Off",
                         }}
-                        onChange={(e) => {
+                        onChange={() => {
                             dispatch(toggle());
                         }
                         }

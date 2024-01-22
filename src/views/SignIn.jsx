@@ -53,7 +53,7 @@ export default function SignIn() {
             <div className='login--image'>
                 <div className="form--container">
                     <div className="form--items">
-                        <h6>SING IN</h6>
+                        <h6>SIGN IN</h6>
 
                         <Form method='post'>
                             <input
