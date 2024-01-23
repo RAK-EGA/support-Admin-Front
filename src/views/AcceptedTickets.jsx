@@ -9,43 +9,22 @@ import { useSelector } from "react-redux";
 
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
+import { get } from "../helper functions/helperFunctions";
 
 // spinner should work test it out when apis are made
 export async function loader() {
 
     // make api call to get tickets here they com,e filtered show only
 
-    const createTickets = () => {
-        const reqs = []
-        for (let i = 1; i < 11; i++) {
+    const [req, error] = await get("/support/viewAcceptedTickets");
 
-            const rand = Math.floor(Math.random() * 3) + 1
+    if (error)
+        throw error;
 
-            reqs.push(
-                {
-                    id: `${i}`,
-                    category: 'garbage',
-                    location: 'RAK',
-                    date: '18/12/2023',
-                    status: rand == 1 ? "opened" : rand == 2 ? "proccessing" : "closed",
-                    // add data here for tickets
-                },
-            );
-        }
-        return reqs;
-    };
-    const tickets = createTickets();
+    const tickets = req.data;
+
     return { tickets };
 }
-
-
-// use this when heading to view a specific ticket
-// export async function action() {
-//     const contact = await createContact();
-//     return redirect(`/contacts/${contact.id}/edit`);
-// }
-
-
 
 export default function AcceptedTickets() {
 
@@ -56,8 +35,8 @@ export default function AcceptedTickets() {
     const Items = tickets.map((ticket) => {
         return (
             <Link
-                to={`${ticket.id}`}
-                key={ticket.id}
+                to={`${ticket._id}`}
+                key={ticket._id}
 
             >
                 <ListItem item={ticket} />
@@ -85,7 +64,13 @@ export default function AcceptedTickets() {
             {/* make this a component */}
             <div className={`display--elements ${className}`}>
                 {/* map to tickets here with a component  */}
-                {Items}
+                {tickets.length > 0 ? Items : <p className={className} style={
+                    {
+                        padding: "2rem",
+                        textAlign:"center",
+
+                    }
+                }>No Accepted Tickets</p>}
 
             </div>
 

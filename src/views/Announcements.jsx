@@ -161,7 +161,13 @@ export default function Announcements() {
             <Header name={"Announcements"} searching={searching} q={q} mess={mess} />
 
             <div className="announcements--containter">
-                {announcements.length > 0 ? Items : <div className="no--announcements"><p>No Announcements</p></div>}
+                {announcements.length > 0 ? Items : <div className="no--announcements"><p className={isDarkmode?"light--gray":""} style={
+                    {
+                        padding: "2rem",
+                        textAlign:"center",
+
+                    }
+                }>No Announcements</p></div>}
 
             </div>
             <div className="forms--holder">

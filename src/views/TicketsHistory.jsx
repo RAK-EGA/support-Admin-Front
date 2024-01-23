@@ -3,7 +3,7 @@ import {
     Link,
     useLoaderData,
     useNavigation,
-    
+
 } from "react-router-dom"
 import { useSelector } from "react-redux";
 
@@ -62,8 +62,8 @@ export default function Tickets() {
     const Items = tickets.map((ticket) => {
         return (
             <Link
-                to={`${ticket.id}`}
-                key={ticket.id}
+                to={`${ticket._id}`}
+                key={ticket._id}
 
             >
                 <ListItem item={ticket} />
@@ -84,7 +84,7 @@ export default function Tickets() {
 
     return (
         <>
-            <Header name={"Tickets History"} searching={searching} q={q}  />
+            <Header name={"Tickets History"} searching={searching} q={q} />
 
 
             {/* make this a component */}

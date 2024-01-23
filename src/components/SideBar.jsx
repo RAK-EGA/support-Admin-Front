@@ -7,16 +7,23 @@ import permitsIcon from "../assets/Permits.png"
 import Toggle from 'react-toggle'
 import "react-toggle/style.css"
 
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 import { useSelector, useDispatch } from "react-redux"
 import { toggle } from "../features/darkmode/darkmodeSlice"
 import { useEffect } from "react"
+import { update } from "../features/auth/authSlice"
 
 export default function NavBar() {
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const dispatch = useDispatch();
     const className = isDarkmode ? "side--bar-dark " : "side--bar-light";
+    const navigate = useNavigate();
+    const logout = () => {
+        localStorage.removeItem("user");
+        dispatch(update(null));
+        navigate("/signIn")
+    }
     useEffect(() => {
         document.body.style.backgroundColor = isDarkmode ? 'rgb(0 0 0 / 36%)' : '#F3F1EA';
         /* Side Nav */
@@ -164,10 +171,12 @@ export default function NavBar() {
                 </div>
 
                 <div >
-                    <button className="logout--button" style={{
-                        color: isDarkmode ? "#000000" : "#FFFFFF"
+                    <button className="logout--button"
+                        onClick={logout}
+                        style={{
+                            color: isDarkmode ? "#000000" : "#FFFFFF"
 
-                    }}>
+                        }}>
                         <svg style={{
                             marginRight: "7px",
                         }} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -129,6 +129,10 @@ const router = createBrowserRouter(
               loader={ticketLoader}
               action={ticketAction}
             />
+            <Route
+              path="TicketsHistory/:ticketId/dispatch"
+              action={dispatchAction}
+            />
 
             {/* AcceptedTickets */}
             <Route

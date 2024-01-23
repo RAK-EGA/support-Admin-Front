@@ -3,10 +3,9 @@ import "../styles/login.css";
 import signInlogo from "../assets/signInlogo.png"
 import {
     Form, redirect,
-
-
 } from "react-router-dom"
-
+import store from '../store';
+import { update } from '../features/auth/authSlice';
 // let baseUrl = 'http://172.27.134.146:3000';
 
 let baseUrl = 'https://rakmun-api.rakega.online'
@@ -28,10 +27,14 @@ export async function action({ request }) {
         const user = JSON.stringify(res.data);
 
         localStorage.setItem("user", user);
+        store.dispatch(update())
 
     } catch (error) {
         console.log(error);
+        alert(error.response.data.message);
+        return redirect("/signin");
     }
+
     return redirect("/");
 
 }

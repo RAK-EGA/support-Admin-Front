@@ -18,7 +18,7 @@ export default function Header({ name, searching = false, q = '', allowSearch = 
                     {mess ? <div className="error--message">{mess}</div> : null}
                     <input
                         id={name}
-                        className={searching ? "loading" + className : "" + className}
+                        className={searching ? "loading " + className : "" + className}
                         aria-label={`Search ${name}`}
                         type="search"
                         name={name}

@@ -7,11 +7,13 @@ import '../styles/modal.css'
 
 export default function Modal({ isShowing, hide, fileInfo }) {
 
-    function isImage(type) {
-        return ['png', 'jpeg', 'webp', 'jpg'].includes(type);
-    }
+
     function show(type) {
         let display
+        try{}
+        catch(e){
+            throw e;
+        }
         if (type === "Accept") {
             display = (
                 // display here a list of 3rd parties + button send it 
@@ -76,20 +78,21 @@ export default function Modal({ isShowing, hide, fileInfo }) {
 
 
                         <button className="button" style={{
-                            marginTop:"2rem",
+                            marginTop: "2rem",
                         }}
                         >dispatch</button>
                     </Form>
                 </div>
             );
         }
-        else if (isImage(type)) {
+        else if (type === "image") {
             display = (
                 <img src={fileInfo.path} alt="attachment img" />
             );
         }
         else {
             display = (
+
                 <iframe src={fileInfo.path} width={"100%"} height={"100%"} allowFullScreen >
                     <p>Your browser does not support iframes.</p>
                 </iframe>
@@ -111,7 +114,10 @@ export default function Modal({ isShowing, hide, fileInfo }) {
                         </button>
                     </div>
                     <div className="media--holder">
-                        {show(fileInfo.type)}
+
+                        {
+                            show(fileInfo.type)
+                        }
 
                     </div>
 
