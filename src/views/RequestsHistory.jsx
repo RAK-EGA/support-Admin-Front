@@ -1,17 +1,20 @@
 import {
     Link,
     useLoaderData,
-
-
+    useNavigation,
 } from "react-router-dom"
 import { useSelector } from "react-redux";
 
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
+import { useEffect } from "react";
 
 // spinner should work test it out when apis are made
-export async function loader() {
-
+export async function loader({ request }) {
+    const url = new URL(request.url);
+    const q = url.searchParams.get("Requests History");
+    console.log(`here is your query I will filter the Requests with it eventually I promise
+    q = ${q}`);
     // make api call to get requests  here they com,e filtered show only
     const createRequests = () => {
         const reqs = []
@@ -33,15 +36,20 @@ export async function loader() {
         return reqs;
     };
     const requests = createRequests();
-    return { requests };
+    return { q, requests };
 }
 
 
+// export async function action() {
+//     const contact = await createContact();
+//     return redirect(`/contacts/${contact.id}/edit`);
+// }
 
 
 
 export default function Requests() {
-    const { requests } = useLoaderData();
+    const { q, requests } = useLoaderData();
+    const navigation = useNavigation();
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--primary light--gray" : "";
     const Items = requests.map((request) => {
@@ -59,12 +67,20 @@ export default function Requests() {
 
     });
 
+    const searching =
+        navigation.location &&
+        new URLSearchParams(navigation.location.search).has(
+            "Requests History"
+        );
 
+    useEffect(() => {
+        document.getElementById("Requests History").value = q;
+    }, [q]);
 
     return (
 
         <>
-            <Header name={"Unviewed Requests"} allowSearch={false} />
+            <Header name={"Requests History"} searching={searching} q={q} />
 
 
             <div className={`display--elements ${className}`}>

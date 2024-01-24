@@ -25,7 +25,7 @@ export default function Index(){
             }
         }>
 
-            This is a demo Index for sprint 1
+            This is a demo Index for sprint 3
         
         </div>
     );

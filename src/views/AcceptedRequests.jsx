@@ -64,7 +64,7 @@ export default function Requests() {
     return (
 
         <>
-            <Header name={"Unviewed Requests"} allowSearch={false} />
+            <Header name={"Accepted Requests"} allowSearch={false} />
 
 
             <div className={`display--elements ${className}`}>

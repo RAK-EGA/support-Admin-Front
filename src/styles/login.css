@@ -42,7 +42,7 @@
     width: 437px;
     height: 409px;
 
-    background: rgba(210, 199, 173, 0.25);
+    background: rgba(255, 255, 255, 0.25);
     /* background-color: #594a2ea3; */
 
     box-shadow: 9px 9px 4px rgba(157, 132, 92, 0.31);
@@ -70,7 +70,7 @@
     font-size: 40px;
     line-height: 60px;
 
-    color: #6F5323;
+    color: #ffffff;
     text-align: center;
 }
 

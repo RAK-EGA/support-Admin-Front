@@ -11,6 +11,12 @@ import Tickets, {
   loader as ticketsLoader,
 } from "./views/Tickets";
 
+import AcceptedTickets, {
+  loader as acceptedTicketsLoader,
+} from "./views/AcceptedTickets";
+import TicketsHistory, {
+  loader as ticketsHistoryLoader,
+} from "./views/TicketsHistory";
 import Ticket, {
   loader as ticketLoader,
   action as ticketAction,
@@ -19,6 +25,12 @@ import Ticket, {
 import Requests, {
   loader as requestsLoader
 } from "./views/Requests";
+import AcceptedRequests, {
+  loader as acceptedRequestsLoader
+} from "./views/AcceptedRequests";
+import RequestsHistory, {
+  loader as requestsHistoryLoader
+} from "./views/RequestsHistory";
 
 import Request, {
   loader as requestLoader,
@@ -38,7 +50,12 @@ import {
   action as deleteAnnouncementsAction,
 } from "./views/DeleteAnnouncements"
 
-
+import {
+  action as dispatchAction,
+} from "./views/DispatchTicket"
+import {
+  action as dispatchRequestAction,
+} from "./views/DispatchRequest"
 // import Users, {
 //   action as usersAction,
 //   loader as usersLoader,
@@ -77,13 +94,6 @@ const router = createBrowserRouter(
               path="tickets/"
               element={<Tickets />}
               loader={ticketsLoader}
-            // action={} when going to specific
-            />
-            <Route
-              path="requests/"
-              element={<Requests />}
-              loader={requestsLoader}
-            // action={}
             />
             <Route
               path="tickets/:ticketId"
@@ -92,7 +102,76 @@ const router = createBrowserRouter(
               action={ticketAction}
             />
             <Route
+              path="tickets/:ticketId/dispatch"
+              action={dispatchAction}
+            />
+            <Route
+              path="AcceptedTickets/"
+              element={<AcceptedTickets />}
+              loader={acceptedTicketsLoader}
+            // action={} when going to specific
+            />
+            <Route
+              path="AcceptedTickets/:ticketId"
+              element={<Ticket />}
+              loader={ticketLoader}
+              action={ticketAction}
+            />
+            <Route
+              path="TicketsHistory/"
+              element={<TicketsHistory />}
+              loader={ticketsHistoryLoader}
+            // action={} when going to specific
+            />
+            <Route
+              path="TicketsHistory/:ticketId"
+              element={<Ticket />}
+              loader={ticketLoader}
+              action={ticketAction}
+            />
+            <Route
+              path="TicketsHistory/:ticketId/dispatch"
+              action={dispatchAction}
+            />
+
+            {/* AcceptedTickets */}
+            <Route
+              path="requests/"
+              element={<Requests />}
+              loader={requestsLoader}
+            // action={}
+            />
+
+            <Route
               path="requests/:requestId"
+              element={<Request />}
+              loader={requestLoader}
+              action={requestAction}
+            />
+            <Route
+              path="requests/:requestId/dispatch"
+              action={dispatchRequestAction}
+            />
+            <Route
+              path="AcceptedRequests/"
+              element={<AcceptedRequests />}
+              loader={acceptedRequestsLoader}
+            // action={} when going to specific
+            />
+            <Route
+              path="AcceptedRequests/:requestId"
+              element={<Request />}
+              loader={requestLoader}
+              action={requestAction}
+            />
+            <Route
+              path="RequestsHistory/"
+              element={<RequestsHistory />}
+              loader={requestsHistoryLoader}
+            // action={} when going to specific
+            />
+            <Route
+              path="RequestsHistory/:requestId"
               element={<Request />}
               loader={requestLoader}
               action={requestAction}

@@ -3,12 +3,10 @@ import { patch } from "../helper functions/helperFunctions";
 import "../styles/profile.css"
 
 import {
-
     Form,
-
-
 } from "react-router-dom"
 
+import { useSelector } from "react-redux";
 
 
 
@@ -36,6 +34,9 @@ export async function action({ request }) {
 
 export default function Profile() {
     const { user } = JSON.parse(localStorage.getItem("user"));
+    const isDarkmode = useSelector((state) => state.darkmode.value);
+    const className = isDarkmode ? "dark--primary light--gray" : "";
+    const textareaClassName = isDarkmode ? "dark--first ligh--gray" : "";
     let keys = [];
     for (let key in user) {
         keys.push(key);
@@ -45,11 +46,11 @@ export default function Profile() {
             return (
                 <div key={key} >
                     <div className="profile--feild">
-                        <label className="profile--label" htmlFor={key}>{key}</label>
-                        <input className="faded profile--input" type="text" name={key} id={key} disabled defaultValue={user[key]} />
+                        <label className={`profile--label ${className}`} htmlFor={key}>{key}</label>
+                        <input className={`faded profile--input ${textareaClassName}`} type="text" name={key} id={key} disabled defaultValue={user[key]} />
 
                     </div>
-                </div >
+                </div>
 
             );
         };
@@ -58,7 +59,7 @@ export default function Profile() {
         <>
             <Header name="MY PROFILE" allowSearch={false} />
 
-            <div className="display--elements" style={{
+            <div className={`display--elements ${className}`} style={{
                 padding: "3rem",
             }}>
 
@@ -69,15 +70,15 @@ export default function Profile() {
                     <Form method="post" className="profile--form">
 
                         <div className="profile--feild">
-                            <label htmlFor="password" className="profile--label">Password</label>
+                            <label htmlFor="password" className={`profile--label ${className}`}>Password</label>
 
-                            <input type="password" className="profile--input" required name="password" id="password" />
+                            <input type="password" className={`profile--input ${textareaClassName}`} required name="password" id="password" />
 
                         </div>
                         <div className="profile--feild">
-                            <label htmlFor="passwordConfirm" className="profile--label">Confirm Password </label>
+                            <label htmlFor="passwordConfirm" className={`profile--label ${className}`}>Confirm Password </label>
 
-                            <input type="password" className="profile--input" required name="confirmPassword" id="passwordConfirm" />
+                            <input type="password" className={`profile--input ${textareaClassName}`} required name="confirmPassword" id="passwordConfirm" />
 
                         </div>
 

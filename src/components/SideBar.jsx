@@ -1,5 +1,4 @@
 import casesIcon from "../assets/casesIcon.png"
-import logoutIcont from "../assets/Logout.png"
 import darkmodeIcon from "../assets/darkmodeIcon.png"
 import announcementsIcon from "../assets/anouncementsIcon.png"
 
@@ -8,18 +7,25 @@ import permitsIcon from "../assets/Permits.png"
 import Toggle from 'react-toggle'
 import "react-toggle/style.css"
 
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 import { useSelector, useDispatch } from "react-redux"
 import { toggle } from "../features/darkmode/darkmodeSlice"
 import { useEffect } from "react"
+import { update } from "../features/auth/authSlice"
 
 export default function NavBar() {
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const dispatch = useDispatch();
     const className = isDarkmode ? "side--bar-dark " : "side--bar-light";
+    const navigate = useNavigate();
+    const logout = () => {
+        localStorage.removeItem("user");
+        dispatch(update(null));
+        navigate("/signIn")
+    }
     useEffect(() => {
-        document.body.style.backgroundColor = isDarkmode ? '#d2c7ad5b' : '#F3F1EA';
+        document.body.style.backgroundColor = isDarkmode ? 'rgb(0 0 0 / 36%)' : '#F3F1EA';
         /* Side Nav */
 
         // box-shadow: 8px 4px 4.6px rgba(210, 199, 173, 0.25);
@@ -42,8 +48,83 @@ export default function NavBar() {
                                         : ""
                             }
                         >
-                            <img src={casesIcon} alt="cases Icon" /><span>Tickets</span>
+                            <img src={casesIcon} alt="cases Icon" /><span>Unviewed Tickets</span>
 
+                        </NavLink>
+                    </li>
+                    <li>
+                        {/* <Link to={}/> */}
+                        <NavLink
+                            to={`AcceptedTickets/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={casesIcon} alt="cases Icon" /><span>Accepted Tickets</span>
+
+                        </NavLink>
+                    </li>
+                    <li>
+                        {/* <Link to={}/> */}
+                        <NavLink
+                            to={`TicketsHistory/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={casesIcon} alt="cases Icon" /><span>Tickets History</span>
+
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink
+                            to={`requests/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={permitsIcon} alt="pernits Icon" /><span>Unviewed Requests</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to={`AcceptedRequests/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={permitsIcon} alt="pernits Icon" /><span>Accepted Requests</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to={`RequestsHistory/`}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={permitsIcon} alt="pernits Icon" /><span>Requests History</span>
                         </NavLink>
                     </li>
                     <li>
@@ -60,50 +141,6 @@ export default function NavBar() {
                             <img src={announcementsIcon} alt="announcements Icon" /><span>Announcements</span>
                         </NavLink>
 
-                    </li>
-                    {/* News Out of project scope may delete later */}
-                    {/* <li>
-                        <NavLink
-                            to={`News/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? "active"
-                                    : isPending
-                                        ? "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={newsIcon} alt="news Icon" /><span>News</span>
-                        </NavLink>
-                    </li> */}
-                    {/* moved responsibility to Admin/Service domain */}
-                    {/* <li>
-                        <NavLink
-                            to={`users/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? "active"
-                                    : isPending
-                                        ? "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={usersIcon} alt="users Icon" /><span>Users</span>
-                        </NavLink>
-                    </li> */}
-                    <li>
-                        <NavLink
-                            to={`requests/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? isDarkmode ? "active-dark" : "active"
-                                    : isPending
-                                        ? isDarkmode ? "pending-dark" : "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={permitsIcon} alt="pernits Icon" /><span>Requests</span>
-                        </NavLink>
                     </li>
 
                 </ul>
@@ -126,7 +163,7 @@ export default function NavBar() {
                             checked: "On",
                             unchecked: "Off",
                         }}
-                        onChange={(e) => {
+                        onChange={() => {
                             dispatch(toggle());
                         }
                         }
@@ -134,10 +171,12 @@ export default function NavBar() {
                 </div>
 
                 <div >
-                    <button className="logout--button" style={{
-                        color: isDarkmode ? "#000000" : "#FFFFFF"
+                    <button className="logout--button"
+                        onClick={logout}
+                        style={{
+                            color: isDarkmode ? "#000000" : "#FFFFFF"
 
-                    }}>
+                        }}>
                         <svg style={{
                             marginRight: "7px",
                         }} width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">

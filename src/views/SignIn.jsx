@@ -3,13 +3,12 @@ import "../styles/login.css";
 import signInlogo from "../assets/signInlogo.png"
 import {
     Form, redirect,
-
-
 } from "react-router-dom"
+import store from '../store';
+import { update } from '../features/auth/authSlice';
+// let baseUrl = 'http://172.27.134.146:3000';
 
-let baseUrl = 'http://172.27.134.146:3000';
-
-// let baseUrl = 'https://rakmun-api.rakega.online'
+let baseUrl = 'https://rakmun-api.rakega.online'
 
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
@@ -28,10 +27,14 @@ export async function action({ request }) {
         const user = JSON.stringify(res.data);
 
         localStorage.setItem("user", user);
+        store.dispatch(update())
 
     } catch (error) {
-
+        console.log(error);
+        alert(error.response.data.message);
+        return redirect("/signin");
     }
+
     return redirect("/");
 
 }
@@ -53,7 +56,7 @@ export default function SignIn() {
             <div className='login--image'>
                 <div className="form--container">
                     <div className="form--items">
-                        <h6>Sign in</h6>
+                        <h6>SIGN IN</h6>
 
                         <Form method='post'>
                             <input
