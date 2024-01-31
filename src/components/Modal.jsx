@@ -10,10 +10,7 @@ export default function Modal({ isShowing, hide, fileInfo }) {
 
     function show(type) {
         let display
-        try{}
-        catch(e){
-            throw e;
-        }
+
         if (type === "Accept") {
             display = (
                 // display here a list of 3rd parties + button send it 
@@ -21,8 +18,8 @@ export default function Modal({ isShowing, hide, fileInfo }) {
                     <Form method="post" action="dispatch">
                         <input type="text" hidden readOnly value={fileInfo.path} name="id"></input>
                         <div style={{
-                            display: "flex"
-
+                            display: "flex",
+                            position: 'relative',
                         }}>
                             <div
                                 className="attachment"
@@ -76,18 +73,33 @@ export default function Modal({ isShowing, hide, fileInfo }) {
 
                         </div>
 
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignContent: 'center',
+                            alignItems: 'center',
+                        }}>
+                            <button className="button" style={{
+                                marginTop: "2rem",
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignContent: 'center',
+                                alignItems: 'center',
+                            }}
+                            >dispatch</button>
+                        </div>
 
-                        <button className="button" style={{
-                            marginTop: "2rem",
-                        }}
-                        >dispatch</button>
                     </Form>
                 </div>
             );
         }
         else if (type === "image") {
             display = (
-                <img src={fileInfo.path} alt="attachment img" />
+                <img src={fileInfo.path} alt="attachment img"  style={{
+                    width:'100%',
+                    height:'100%',
+                    objectFit:'contain'
+                }}/>
             );
         }
         else {
@@ -107,7 +119,7 @@ export default function Modal({ isShowing, hide, fileInfo }) {
         <>
             <div className="modal-overlay" />
             <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
-                <div className="modal">
+                <div className={fileInfo.type === 'Accept' ? "modal--mini" : "modal"}>
                     <div className="modal-header">
                         <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
                             <span aria-hidden="true">&times;</span>

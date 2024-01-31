@@ -129,7 +129,7 @@ export async function deletereq(path, data) {
                 return null
 
             }
-        })
+        });
         //check status when calling to make sure its not 401 
         return [response, null];
 
@@ -154,7 +154,14 @@ export async function patch(path, data) {
 
     try {
 
-        const response = await axiosClient.patch(path,data);
+
+        const response = await axiosClient.patch(path, data, {
+            validateStatus: function (status) {
+                if (status === 401 || status === 200 || status === 201 || status === 404) return true;
+                return null
+
+            }
+        });
         //check status when calling to make sure its not 401 
         return [response, null];
 

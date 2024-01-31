@@ -1,8 +1,12 @@
-import casesIcon from "../assets/casesIcon.png"
+import unviewedTicketsIcon from "../assets/unviewedTicketsIcon.png"
+import acceptedTicketsIcon from "../assets/acceptedTicketsIcon.png"
+import ticketsHistoryIcon from "../assets/ticketsHistoryIcon.png"
+import unviewedRequestsIcon from "../assets/unviewedRequestsIcon.png"
+import acceptedRequestsIcon from "../assets/acceptedRequestsIcon.png"
+import requestsHistoryIcon from "../assets/requestsHistoryIcon.png"
 import darkmodeIcon from "../assets/darkmodeIcon.png"
 import announcementsIcon from "../assets/anouncementsIcon.png"
-
-import permitsIcon from "../assets/Permits.png"
+import notificationIcon from "../assets/notificationsIcon.png"
 
 import Toggle from 'react-toggle'
 import "react-toggle/style.css"
@@ -36,97 +40,109 @@ export default function NavBar() {
 
             <nav>
                 <ul>
-                    <li>
-                        {/* <Link to={}/> */}
-                        <NavLink
-                            to={`tickets/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? isDarkmode ? "active-dark" : "active"
-                                    : isPending
-                                        ? isDarkmode ? "pending-dark" : "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={casesIcon} alt="cases Icon" /><span>Unviewed Tickets</span>
 
-                        </NavLink>
-                    </li>
-                    <li>
-                        {/* <Link to={}/> */}
-                        <NavLink
-                            to={`AcceptedTickets/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? isDarkmode ? "active-dark" : "active"
-                                    : isPending
-                                        ? isDarkmode ? "pending-dark" : "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={casesIcon} alt="cases Icon" /><span>Accepted Tickets</span>
+                    {
+                        JSON.parse(localStorage.getItem('user')).user.type.includes("complaint") &&
+                        <>
+                            <li>
+                                <NavLink
+                                    to={`tickets/`}
+                                    className={({ isActive, isPending }) =>
+                                        isActive
+                                            ? isDarkmode ? "active-dark" : "active"
+                                            : isPending
+                                                ? isDarkmode ? "pending-dark" : "pending"
+                                                : ""
+                                    }
+                                >
+                                    <img src={unviewedTicketsIcon} alt="unviewed Tickets Icon" /><span>Unviewed Complaints</span>
 
-                        </NavLink>
-                    </li>
-                    <li>
-                        {/* <Link to={}/> */}
-                        <NavLink
-                            to={`TicketsHistory/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? isDarkmode ? "active-dark" : "active"
-                                    : isPending
-                                        ? isDarkmode ? "pending-dark" : "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={casesIcon} alt="cases Icon" /><span>Tickets History</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                {/* <Link to={}/> */}
+                                <NavLink
+                                    to={`AcceptedTickets/`}
+                                    className={({ isActive, isPending }) =>
+                                        isActive
+                                            ? isDarkmode ? "active-dark" : "active"
+                                            : isPending
+                                                ? isDarkmode ? "pending-dark" : "pending"
+                                                : ""
+                                    }
+                                >
+                                    <img src={acceptedTicketsIcon} alt="Accepted Tickets Icon" /><span>Accepted Complaints</span>
 
-                        </NavLink>
-                    </li>
+                                </NavLink>
+                            </li>
+                            <li>
+                                {/* <Link to={}/> */}
+                                <NavLink
+                                    to={`TicketsHistory/`}
+                                    className={({ isActive, isPending }) =>
+                                        isActive
+                                            ? isDarkmode ? "active-dark" : "active"
+                                            : isPending
+                                                ? isDarkmode ? "pending-dark" : "pending"
+                                                : ""
+                                    }
+                                >
+                                    <img src={ticketsHistoryIcon} alt="tickets history Icon" /><span>Complaints History</span>
 
-                    <li>
-                        <NavLink
-                            to={`requests/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? isDarkmode ? "active-dark" : "active"
-                                    : isPending
-                                        ? isDarkmode ? "pending-dark" : "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={permitsIcon} alt="pernits Icon" /><span>Unviewed Requests</span>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to={`AcceptedRequests/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? isDarkmode ? "active-dark" : "active"
-                                    : isPending
-                                        ? isDarkmode ? "pending-dark" : "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={permitsIcon} alt="pernits Icon" /><span>Accepted Requests</span>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to={`RequestsHistory/`}
-                            className={({ isActive, isPending }) =>
-                                isActive
-                                    ? isDarkmode ? "active-dark" : "active"
-                                    : isPending
-                                        ? isDarkmode ? "pending-dark" : "pending"
-                                        : ""
-                            }
-                        >
-                            <img src={permitsIcon} alt="pernits Icon" /><span>Requests History</span>
-                        </NavLink>
-                    </li>
+                                </NavLink>
+                            </li>
+                        </>
+                    }
+
+
+                    {
+                        JSON.parse(localStorage.getItem('user')).user.type.includes("permit")  &&
+                        <>
+                            <li>
+                                <NavLink
+                                    to={`requests/`}
+                                    className={({ isActive, isPending }) =>
+                                        isActive
+                                            ? isDarkmode ? "active-dark" : "active"
+                                            : isPending
+                                                ? isDarkmode ? "pending-dark" : "pending"
+                                                : ""
+                                    }
+                                >
+                                    <img src={unviewedRequestsIcon} alt="unviewed requests Icon" /><span>Unviewed Permits</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to={`AcceptedRequests/`}
+                                    className={({ isActive, isPending }) =>
+                                        isActive
+                                            ? isDarkmode ? "active-dark" : "active"
+                                            : isPending
+                                                ? isDarkmode ? "pending-dark" : "pending"
+                                                : ""
+                                    }
+                                >
+                                    <img src={acceptedRequestsIcon} alt="Accepted requests Icon" /><span>Accepted Permits</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to={`RequestsHistory/`}
+                                    className={({ isActive, isPending }) =>
+                                        isActive
+                                            ? isDarkmode ? "active-dark" : "active"
+                                            : isPending
+                                                ? isDarkmode ? "pending-dark" : "pending"
+                                                : ""
+                                    }
+                                >
+                                    <img src={requestsHistoryIcon} alt="requests history Icon" /><span>Permits History</span>
+                                </NavLink>
+                            </li>
+                        </>
+                    }
+
                     <li>
                         <NavLink
                             to={`announcements/`}
@@ -139,6 +155,21 @@ export default function NavBar() {
                             }
                         >
                             <img src={announcementsIcon} alt="announcements Icon" /><span>Announcements</span>
+                        </NavLink>
+
+                    </li>
+                    <li>
+                        <NavLink
+                            to={"notifications/"}
+                            className={({ isActive, isPending }) =>
+                                isActive
+                                    ? isDarkmode ? "active-dark" : "active"
+                                    : isPending
+                                        ? isDarkmode ? "pending-dark" : "pending"
+                                        : ""
+                            }
+                        >
+                            <img src={notificationIcon} alt="announcements Icon" /><span>Notifications</span>
                         </NavLink>
 
                     </li>

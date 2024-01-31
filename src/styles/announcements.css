@@ -20,6 +20,24 @@
 
 }
 
+.notification {
+    padding: 1rem;
+    margin-top: 3rem;
+    width: 100%;
+    background-color: #F3F1EA;
+
+    /* Rectangle 59 */
+    border-radius: 10px;
+    display: flex;
+    /* gap: 1rem; */
+    justify-content: space-between;
+
+
+    border: 1px solid #DF0C0C;
+    box-shadow: 4px 6px 4px rgba(223, 12, 12, 0.25);
+
+}
+
 .announcement--info>h6 {
     /* Real estate trading Statistical Reports of real estate trading in RAK shows that there is increasing in the acquisition rate by 20% since his highness signed a document for encouraging the young citizens to buy real estates at lower prices */
 
@@ -149,7 +167,7 @@
 }
 
 .save--button {
-   
+
 
 
     /* beige */

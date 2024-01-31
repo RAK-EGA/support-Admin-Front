@@ -1,11 +1,19 @@
 import { useSelector } from "react-redux";
 
+
+
+
+
+
+
+
+
 export default function ListItem({ item }) {
-    const color = item.status === "closed" ? "green" : item.status === "opened" ? "red" : "gray"
+    const color = item.status === "RESOLVED" ? "green" : item.status === "OPEN" ? "red" : "gray"
     const pointFill = color == "green" ? "#007F00" : color == "red" ? "#D30000" : "#767676"
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "light--gray" : "";
-    const additional_fields = item.additional_fields;
+    const additional_fields = item.hasOwnProperty('category') ? item.additional_fields : item.serviceDetails;
 
 
     function getLocation(additional_fields) {
@@ -13,7 +21,7 @@ export default function ListItem({ item }) {
             if (additional_fields[field].field_type === "location") return additional_fields[field];
         }
     }
-    const location = getLocation(additional_fields)
+    const location = item.hasOwnProperty('category') ? getLocation(additional_fields) : null;
 
     return (
 
@@ -23,8 +31,8 @@ export default function ListItem({ item }) {
                     <span className={className}>{item._id}</span>
                 </div>
                 <div className="item--category">
-                    <span className={className}>Category: {item.category}</span>
-                    <span className={className}>Location: {location.value}</span>
+                    <span className={className}>{item.hasOwnProperty('category') ? `Category: ${item.category}` : `Service Name: ${item.serviceName}`}</span>
+                    <span className={className}>{item.hasOwnProperty('category') ? `Location: ${location.value}` : ""}</span>
                 </div>
             </div>
             <div className="item--date">

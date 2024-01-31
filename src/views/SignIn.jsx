@@ -30,7 +30,6 @@ export async function action({ request }) {
         store.dispatch(update())
 
     } catch (error) {
-        console.log(error);
         alert(error.response.data.message);
         return redirect("/signin");
     }

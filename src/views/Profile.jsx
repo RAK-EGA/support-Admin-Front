@@ -4,6 +4,7 @@ import "../styles/profile.css"
 
 import {
     Form,
+    redirect
 } from "react-router-dom"
 
 import { useSelector } from "react-redux";
@@ -25,6 +26,9 @@ export async function action({ request }) {
 
     if (error) {
         throw error;
+    }
+    if (res.status == '401') {
+        return redirect('/signIn');
     }
     alert("password changed succesfully")
     return 1;
