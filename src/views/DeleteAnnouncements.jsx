@@ -1,6 +1,6 @@
 import { instance } from "./SignIn";
 import { redirect } from "react-router-dom";
-
+import { logoutInAction } from "../components/Auth"
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
     const user = localStorage.getItem("user");
@@ -27,7 +27,7 @@ export async function action({ request }) {
     });
 
     if (announce.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction;
     }
     // in side the function  of calidate status return true only if status 401 else catch error
     else if (announce.status != '200') {

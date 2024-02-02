@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import "../styles/announcements.css"
 import { post } from "../helper functions/helperFunctions";
 // spinner should work test it out when apis are made
-
+import { logoutInAction } from "../components/Auth"
 
 export async function loader({ request, }) {
     // throw 1;
@@ -47,7 +47,7 @@ export async function loader({ request, }) {
     if (error)
         throw error;
     if (announce.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction('/signIn');
     }
     else if (announce.status == '404') {
         announcements = [];
@@ -161,10 +161,10 @@ export default function Announcements() {
             <Header name={"Announcements"} searching={searching} q={q} mess={mess} />
 
             <div className="announcements--containter">
-                {announcements.length > 0 ? Items : <div className="no--announcements"><p className={isDarkmode?"light--gray":""} style={
+                {announcements.length > 0 ? Items : <div className="no--announcements"><p className={isDarkmode ? "light--gray" : ""} style={
                     {
                         padding: "2rem",
-                        textAlign:"center",
+                        textAlign: "center",
 
                     }
                 }>No Announcements</p></div>}

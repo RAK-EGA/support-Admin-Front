@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
 import { get } from "../helper functions/helperFunctions";
-
+import { logoutInAction } from "../components/Auth";
 // spinner should work test it out when apis are made
 export async function loader() {
 
@@ -22,8 +22,9 @@ export async function loader() {
     if (error)
         throw error;
     if (req.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
+
 
 
     const requests = req.data;

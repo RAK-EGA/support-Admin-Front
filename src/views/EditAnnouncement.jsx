@@ -9,7 +9,7 @@ import {
 } from "react-router-dom"
 
 import { useSelector } from "react-redux";
-
+import { logoutInAction } from "../components/Auth"
 
 
 export async function loader({ params }) {
@@ -34,7 +34,7 @@ export async function loader({ params }) {
         throw error
     }
     if (announce.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
     else if (announce.status == '404') {
         announcement = [];
@@ -61,7 +61,7 @@ export async function action({ request }) {
         if (error)
             throw error;
         if (res.status == '401') {
-            return redirect('/signIn');
+            return logoutInAction();
         }
         else {
             return redirect("/announcements?status=success");
@@ -77,7 +77,7 @@ export async function action({ request }) {
         if (error)
             throw error;
         if (res.status == '401') {
-            return redirect('/signIn');
+            return logoutInAction();
         }
         else {
             return redirect("/announcements?status=success")

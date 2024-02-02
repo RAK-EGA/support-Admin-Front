@@ -11,21 +11,27 @@ import notificationIcon from "../assets/notificationsIcon.png"
 import Toggle from 'react-toggle'
 import "react-toggle/style.css"
 
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate, redirect } from "react-router-dom"
 
 import { useSelector, useDispatch } from "react-redux"
 import { toggle } from "../features/darkmode/darkmodeSlice"
 import { useEffect } from "react"
 import { update } from "../features/auth/authSlice"
+import { get } from "../helper functions/helperFunctions"
+import { add } from "../features/notifications/notificationsSlice"
 
 export default function NavBar() {
+
     const isDarkmode = useSelector((state) => state.darkmode.value);
-    const dispatch = useDispatch();
+    const notificationsCounter = useSelector((state) => state.notifications.value);
     const className = isDarkmode ? "side--bar-dark " : "side--bar-light";
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const logout = () => {
         localStorage.removeItem("user");
         dispatch(update(null));
+        dispatch(add(0));
+
         navigate("/signIn")
     }
     useEffect(() => {
@@ -35,6 +41,32 @@ export default function NavBar() {
         // box-shadow: 8px 4px 4.6px rgba(210, 199, 173, 0.25);
 
     },);
+    useEffect(() => {
+        const checkNotificationCount = async () => {
+            const [res, error] = await get('/support/notificationsCounter');
+            if (error) {
+                throw error;
+            }
+            if (res.status == '401') {
+                // cant redirect from here maybe change status to null or something and then if it becomes null usenavigate to /signin
+                logout()
+            }
+
+            const num = res.data
+            dispatch(add(num));
+
+        }
+        let interval = setInterval(() => {
+
+            // call api to check count of notifications every 5min 300000 ms
+            checkNotificationCount()
+
+        }, 300000);
+        return () => clearInterval(interval);
+
+    },);
+
+
     return (
         <div className={`side--bar ${className}`}>
 
@@ -96,7 +128,7 @@ export default function NavBar() {
 
 
                     {
-                        JSON.parse(localStorage.getItem('user')).user.type.includes("permit")  &&
+                        JSON.parse(localStorage.getItem('user')).user.type.includes("permit") &&
                         <>
                             <li>
                                 <NavLink
@@ -169,7 +201,22 @@ export default function NavBar() {
                                         : ""
                             }
                         >
-                            <img src={notificationIcon} alt="announcements Icon" /><span>Notifications</span>
+                            <img src={notificationIcon} alt="notifications Icon" /><span>Notifications
+                                {
+                                    notificationsCounter > 0 && <div
+                                        style={{
+                                            borderRadius: '30px',
+                                            backgroundColor: 'red',
+                                            color: 'white',
+                                            height: '20px',
+                                            width: '20px',
+                                            lineHeight: '0.5rem',
+                                            display: 'inline-flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            marginLeft: '10px',
+                                        }}
+                                    >{notificationsCounter}</div>}</span>
                         </NavLink>
 
                     </li>

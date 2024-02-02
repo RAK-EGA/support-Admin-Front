@@ -9,6 +9,7 @@ import { get } from "../helper functions/helperFunctions";
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
 import { useEffect } from "react";
+import { logoutInAction } from "../components/Auth"
 
 // spinner should work test it out when apis are made
 export async function loader({ request }) {
@@ -46,7 +47,7 @@ export async function loader({ request }) {
         if (error)
             throw error;
         if (res.status == '401') {
-            return redirect('/signIn');
+            return logoutInAction();
         }
         else if (res.status == '404') {
             requests = [];
@@ -66,7 +67,7 @@ export async function loader({ request }) {
     if (error)
         throw error;
     if (res.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
     else if (res.status == '404') {
         requests = [];

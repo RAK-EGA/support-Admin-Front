@@ -6,6 +6,7 @@ import {
     redirect,
 } from "react-router-dom"
 import { useSelector } from "react-redux";
+import { logoutInAction } from "../components/Auth"
 
 
 import ListItem from "../components/ListItem";
@@ -49,7 +50,7 @@ export async function loader({ request }) {
         if (error)
             throw error;
         if (res.status == '401') {
-            return redirect('/signIn');
+            return logoutInAction();
         }
         else if (res.status == '404') {
             tickets = [];
@@ -70,7 +71,7 @@ export async function loader({ request }) {
     if (error)
         throw error;
     if (res.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
     else if (res.status == '404') {
         tickets = [];

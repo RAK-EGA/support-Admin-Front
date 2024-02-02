@@ -9,7 +9,7 @@ import {
 
 import { useSelector } from "react-redux";
 
-
+import { logoutInAction } from "../components/Auth"
 
 
 export async function action({ request }) {
@@ -28,7 +28,7 @@ export async function action({ request }) {
         throw error;
     }
     if (res.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction('/signIn');
     }
     alert("password changed succesfully")
     return 1;

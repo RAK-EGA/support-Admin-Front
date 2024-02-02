@@ -3,10 +3,15 @@ import { Outlet, Navigate, redirect } from "react-router-dom";
 import { get } from '../helper functions/helperFunctions'
 import { useSelector, useDispatch } from "react-redux";
 import { update } from "../features/auth/authSlice";
+import store from "../store";
+import { add } from "../features/notifications/notificationsSlice";
 
-
-
-
+export const logoutInAction = () => {
+    localStorage.removeItem("user");
+    store.dispatch(update(null));
+    store.dispatch(add(0));
+    return redirect("/signIn")
+};
 
 
 export default function Auth() {

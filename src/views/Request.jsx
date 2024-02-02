@@ -10,7 +10,7 @@ import useModal from "../customHooks/useModal";
 
 import imgIcon from "../assets/imgIcon.png"
 import Header from "../components/Header";
-
+import { logoutInAction } from "../components/Auth"
 // spinner should work test it out when apis are made
 export async function loader({ params }) {
     // make api call to get tickets here they com,e filtered show only
@@ -20,9 +20,8 @@ export async function loader({ params }) {
     if (error)
         throw error;
     if (res.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
-    console.log(res.data)
     const attachmentPromises = res.data["serviceDetails"].map(async (field) => {
         if (field.field_type === 'document') {
             const [res, error] = await post('/documents/document/generate-urls', {
@@ -32,7 +31,7 @@ export async function loader({ params }) {
             if (error)
                 throw error;
             if (res.status == '401') {
-                return redirect('/signIn');
+                return logoutInAction();
             }
             field.value = res.data.generatedURLs[0];
         }
@@ -42,7 +41,6 @@ export async function loader({ params }) {
 
     await Promise.all(attachmentPromises);
     const request = res.data;
-    console.log(request);
 
     return { request };
 }

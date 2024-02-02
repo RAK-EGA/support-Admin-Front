@@ -11,6 +11,7 @@ import imgIcon from "../assets/imgIcon.png";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { put, get, post } from "../helper functions/helperFunctions";
+import { logoutInAction } from "../components/Auth"
 
 // spinner should work test it out when apis are made
 export async function loader({ params }) {
@@ -28,7 +29,7 @@ export async function loader({ params }) {
     if (error)
         throw error;
     if (res.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
 
 
@@ -43,7 +44,7 @@ export async function loader({ params }) {
             if (error)
                 throw error;
             if (res.status == '401') {
-                return redirect('/signIn');
+                return logoutInAction();
             }
             field.value = res.data.generatedURLs[0];
         }
@@ -78,7 +79,7 @@ export async function action({ request, }) {
     if (error)
         throw error;
     if (res.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
 
     return redirect(`/tickets`);

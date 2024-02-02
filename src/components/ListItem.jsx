@@ -14,7 +14,7 @@ export default function ListItem({ item }) {
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "light--gray" : "";
     const additional_fields = item.hasOwnProperty('category') ? item.additional_fields : item.serviceDetails;
-
+    const is_exceedSLA = item.isExceeded;
 
     function getLocation(additional_fields) {
         for (let field in additional_fields) {
@@ -25,7 +25,12 @@ export default function ListItem({ item }) {
 
     return (
 
-        <div className="item--container">
+        <div className="item--container" style={is_exceedSLA&&(item.status!="RESOLVED"&&item.status!="CANCELED")? isDarkmode?{
+            backgroundColor:"#4a0808",
+        }:{
+            backgroundColor:"red",
+            borderColor:"#000000",
+        }:null}>
             <div className="item--info">
                 <div className="item--id">
                     <span className={className}>{item._id}</span>

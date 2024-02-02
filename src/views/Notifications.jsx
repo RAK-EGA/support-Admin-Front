@@ -2,13 +2,15 @@ import {
     useLoaderData,
     redirect,
 } from "react-router-dom"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 
 import Header from "../components/Header";
 
 import "../styles/announcements.css"
 import { get } from "../helper functions/helperFunctions";
+import { add } from "../features/notifications/notificationsSlice";
+import { logoutInAction } from "../components/Auth";
 
 export async function loader() {
     // throw 1;
@@ -18,7 +20,7 @@ export async function loader() {
     if (error)
         throw error;
     if (res.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
     else if (res.status == '404') {
         notifications = [];
@@ -40,12 +42,14 @@ export default function Notifications() {
     const { notifications } = useLoaderData();
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--first" : "";
+    const dispatch = useDispatch();
+    dispatch(add(0));
     const Row = (noti) => {
-        const color = noti.status === "closed" ? "green" : noti.status === "OPEN" ? "red" : "gray"
+        const color = noti.status === "RESOLVED" ? "green" : noti.status === "OPEN" ? "red" : "gray"
         const pointFill = color == "green" ? "#007F00" : color == "red" ? "#D30000" : "#767676"
 
         return (
-            <div  key={noti._id} className={`notification ${className}`}>
+            <div key={noti._id} className={`notification ${className}`}>
                 <div className="item--info">
                     <div className="item--id">
                         <span className={className}>{noti.ticketID}</span>

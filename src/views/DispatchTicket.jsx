@@ -1,5 +1,6 @@
 import { redirect } from "react-router-dom";
 import { get, put } from "../helper functions/helperFunctions";
+import { logoutInAction } from "../components/Auth"
 // idk if this works or not well check when we do shit
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
@@ -9,7 +10,7 @@ export async function action({ request }) {
     if (error)
         throw error;
     if (res.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
 
 
@@ -20,7 +21,7 @@ export async function action({ request }) {
     if (error2)
         throw error2;
     if (res2.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }    // `/tickets/${data.id}` maybe redirect instead and make it so its back to the list
     return redirect(`/AcceptedTickets`);
 }
