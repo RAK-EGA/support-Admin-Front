@@ -79,6 +79,9 @@ import Notifications, {
   loader as notificationsLoader
 } from "./views/Notifications";
 import Auth from "./components/Auth";
+import { ToastContainer, } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 
@@ -249,7 +252,11 @@ const router = createBrowserRouter(
 function App() {
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </>
+
   );
 }
 

@@ -77,11 +77,8 @@ export async function loader({ request }) {
     }
 
 
-    const status = url.searchParams.get("status");
 
-
-
-    return { q, requests, mess, status };
+    return { q, requests, mess };
 }
 
 
@@ -94,7 +91,7 @@ export async function loader({ request }) {
 
 
 export default function Requests() {
-    const { q, requests, mess, status } = useLoaderData();
+    const { q, requests, mess } = useLoaderData();
 
     const navigation = useNavigation();
     const isDarkmode = useSelector((state) => state.darkmode.value);

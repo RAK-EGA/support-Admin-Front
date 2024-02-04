@@ -11,10 +11,10 @@ import useModal from "../customHooks/useModal";
 import imgIcon from "../assets/imgIcon.png"
 import Header from "../components/Header";
 import { logoutInAction } from "../components/Auth"
-// spinner should work test it out when apis are made
+import { addMessage } from '../features/messages/messagesSlice';
+import store from '../store';
+
 export async function loader({ params }) {
-    // make api call to get tickets here they com,e filtered show only
-    // const ticket = await getTicket(params.ticketId);
     if (JSON.parse(localStorage.getItem('user')).user.type != "permit") return redirect('/');
     const [res, error] = await get("/support/viewPermit/", params.requestId);
     if (error)
@@ -46,9 +46,7 @@ export async function loader({ params }) {
 }
 
 
-// maybe use fetcher form to implement optimistic rendering
 export async function action({ request, }) {
-    // call endpoint to change status rediret to same page
     const data = Object.fromEntries(await request.formData());
 
     const choice = { choice: data.choice }
@@ -60,6 +58,9 @@ export async function action({ request, }) {
     if (res.status == '401') {
         return redirect('/signIn');
     }
+
+    const f = data.choice == 'accept' ? "Accepted" : "Rejected"
+    store.dispatch(addMessage(`Request ${f} Succesfully`));
 
     return redirect(`/requests`);
 }

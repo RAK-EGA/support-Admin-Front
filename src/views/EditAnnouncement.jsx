@@ -11,6 +11,8 @@ import {
 import { useSelector } from "react-redux";
 import { logoutInAction } from "../components/Auth"
 
+import { addMessage } from '../features/messages/messagesSlice';
+import store from '../store';
 
 export async function loader({ params }) {
     // throw 1;
@@ -64,7 +66,9 @@ export async function action({ request }) {
             return logoutInAction();
         }
         else {
-            return redirect("/announcements?status=success");
+            store.dispatch(addMessage(`Annoucement Created Succesfully`));
+
+            return redirect("/announcements");
         }
     }
     else {
@@ -80,7 +84,8 @@ export async function action({ request }) {
             return logoutInAction();
         }
         else {
-            return redirect("/announcements?status=success")
+            store.dispatch(addMessage(`Annoucement Updated Succesfully`));
+            return redirect("/announcements")
         }
     }
 

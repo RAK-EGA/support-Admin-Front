@@ -47,7 +47,7 @@ export async function loader({ request, }) {
     if (error)
         throw error;
     if (announce.status == '401') {
-        return logoutInAction('/signIn');
+        return logoutInAction();
     }
     else if (announce.status == '404') {
         announcements = [];
@@ -66,11 +66,10 @@ export async function loader({ request, }) {
     // ]
 
     // wont be null If being redirected
-    const status = url.searchParams.get("status");
 
 
 
-    return { q, announcements, mess, status };
+    return { q, announcements, mess };
 }
 
 
@@ -84,7 +83,7 @@ export async function action() {
 // use toastify tomorrow maybe its kinda of a refining feature
 export default function Announcements() {
     const [selectedIds, setSelected] = useState([]);
-    const { q, announcements, mess, status } = useLoaderData();
+    const { q, announcements, mess } = useLoaderData();
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--first" : "";
     const navigation = useNavigation();

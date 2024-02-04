@@ -4,8 +4,10 @@ import "../styles/profile.css"
 
 import {
     Form,
-    redirect
 } from "react-router-dom"
+
+import { addMessage } from '../features/messages/messagesSlice';
+import store from '../store';
 
 import { useSelector } from "react-redux";
 
@@ -28,9 +30,11 @@ export async function action({ request }) {
         throw error;
     }
     if (res.status == '401') {
-        return logoutInAction('/signIn');
+        return logoutInAction();
     }
-    alert("password changed succesfully")
+
+    store.dispatch(addMessage(`Password Change Succesfully`));
+
     return 1;
 
 }

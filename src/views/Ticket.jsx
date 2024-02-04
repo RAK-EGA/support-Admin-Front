@@ -12,6 +12,10 @@ import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { put, get, post } from "../helper functions/helperFunctions";
 import { logoutInAction } from "../components/Auth"
+import { addMessage } from '../features/messages/messagesSlice';
+import store from '../store';
+
+
 
 // spinner should work test it out when apis are made
 export async function loader({ params }) {
@@ -81,6 +85,8 @@ export async function action({ request, }) {
     if (res.status == '401') {
         return logoutInAction();
     }
+    const f = data.choice=='accept'?"Accepted":"Rejected"
+    store.dispatch(addMessage(`Ticket ${f} Succesfully`));
 
     return redirect(`/tickets`);
 }

@@ -1,7 +1,10 @@
 import { redirect } from "react-router-dom";
 import { get, put } from "../helper functions/helperFunctions";
 import { logoutInAction } from "../components/Auth"
-// idk if this works or not well check when we do shit
+import { addMessage } from '../features/messages/messagesSlice';
+import store from '../store';
+
+
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
 
@@ -22,6 +25,8 @@ export async function action({ request }) {
         throw error2;
     if (res2.status == '401') {
         return logoutInAction();
-    }    // `/tickets/${data.id}` maybe redirect instead and make it so its back to the list
+    }    
+
+    store.dispatch(addMessage(`Request Dispatched Succesfully`));
     return redirect(`/AcceptedRequests`);
 }

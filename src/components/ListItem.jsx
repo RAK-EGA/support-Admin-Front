@@ -1,13 +1,5 @@
 import { useSelector } from "react-redux";
 
-
-
-
-
-
-
-
-
 export default function ListItem({ item }) {
     const color = item.status === "RESOLVED" ? "green" : item.status === "OPEN" ? "red" : "gray"
     const pointFill = color == "green" ? "#007F00" : color == "red" ? "#D30000" : "#767676"
@@ -25,19 +17,33 @@ export default function ListItem({ item }) {
 
     return (
 
-        <div className="item--container" style={is_exceedSLA&&(item.status!="RESOLVED"&&item.status!="CANCELED")? isDarkmode?{
-            backgroundColor:"#4a0808",
-        }:{
-            backgroundColor:"red",
-            borderColor:"#000000",
-        }:null}>
+        <div className="item--container" style={is_exceedSLA && (item.status != "RESOLVED" && item.status != "CANCELED") ? isDarkmode ? {
+            backgroundColor: "#4a0808",
+        } : {
+            backgroundColor: "red",
+            borderColor: "#000000",
+        } : null}>
             <div className="item--info">
                 <div className="item--id">
                     <span className={className}>{item._id}</span>
                 </div>
                 <div className="item--category">
-                    <span className={className}>{item.hasOwnProperty('category') ? `Category: ${item.category}` : `Service Name: ${item.serviceName}`}</span>
-                    <span className={className}>{item.hasOwnProperty('category') ? `Location: ${location.value}` : ""}</span>
+                    <span
+                        className={className}
+                        style={is_exceedSLA && (item.status != "RESOLVED" && item.status != "CANCELED") ? isDarkmode ? null : {
+                            color: "#fff",
+                        } : null}
+                    >
+                        {item.hasOwnProperty('category') ? `Category: ${item.category}` : `Service Name: ${item.serviceName}`}
+                    </span>
+                    <span
+                        className={className}
+                        style={is_exceedSLA && (item.status != "RESOLVED" && item.status != "CANCELED") ? isDarkmode ? null : {
+                            color: "#fff",
+                        } : null}
+                    >
+                        {item.hasOwnProperty('category') ? `Location: ${location.value}` : ""}
+                    </span>
                 </div>
             </div>
             <div className="item--date">

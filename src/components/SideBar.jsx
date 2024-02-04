@@ -11,7 +11,7 @@ import notificationIcon from "../assets/notificationsIcon.png"
 import Toggle from 'react-toggle'
 import "react-toggle/style.css"
 
-import { NavLink, useNavigate, redirect } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 import { useSelector, useDispatch } from "react-redux"
 import { toggle } from "../features/darkmode/darkmodeSlice"
