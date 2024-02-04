@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import Header from "../components/Header";
 import { get, post, put } from "../helper functions/helperFunctions";
 import {

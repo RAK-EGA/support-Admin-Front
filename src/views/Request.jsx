@@ -1,3 +1,5 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable react-refresh/only-export-components */
 import {
     Form,
     useLoaderData,

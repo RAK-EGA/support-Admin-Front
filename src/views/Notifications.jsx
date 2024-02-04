@@ -1,6 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
     useLoaderData,
-    redirect,
 } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 

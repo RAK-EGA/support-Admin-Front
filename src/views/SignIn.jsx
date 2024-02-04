@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import axios from 'axios';
 import "../styles/login.css";
 import signInlogo from "../assets/signInlogo.png"

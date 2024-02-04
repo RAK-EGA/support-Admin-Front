@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import Header from "../components/Header";
 import { patch } from "../helper functions/helperFunctions";
 import "../styles/profile.css"
@@ -61,7 +62,7 @@ export default function Profile() {
                 </div>
 
             );
-        };
+        }
     });
     return (
         <>
