@@ -23,7 +23,7 @@ export default function Root() {
         dispatch(resetMessage());
 
     }
-    isMessage ? show() : null
+    isMessage ? show() : null;
     return (
         <div id="page--layout">
             <NavBar />

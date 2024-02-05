@@ -40,7 +40,7 @@ export default function NavBar() {
 
         // box-shadow: 8px 4px 4.6px rgba(210, 199, 173, 0.25);
 
-    },);
+    },[isDarkmode]);
     useEffect(() => {
         const checkNotificationCount = async () => {
             const [res, error] = await get('/support/notificationsCounter');
@@ -56,6 +56,7 @@ export default function NavBar() {
             dispatch(add(num));
 
         }
+        checkNotificationCount()
         let interval = setInterval(() => {
 
             // call api to check count of notifications every 5min 300000 ms

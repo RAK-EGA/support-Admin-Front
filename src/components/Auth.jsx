@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useEffect } from "react";
 import { Outlet, Navigate, redirect } from "react-router-dom";
 import { get } from '../helper functions/helperFunctions'
