@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import Header from "../components/Header";
 import { patch } from "../helper functions/helperFunctions";
 import "../styles/profile.css"
@@ -6,9 +7,12 @@ import {
     Form,
 } from "react-router-dom"
 
+import { addMessage } from '../features/messages/messagesSlice';
+import store from '../store';
+
 import { useSelector } from "react-redux";
 
-
+import { logoutInAction } from "../components/Auth"
 
 
 export async function action({ request }) {
@@ -26,7 +30,12 @@ export async function action({ request }) {
     if (error) {
         throw error;
     }
-    alert("password changed succesfully")
+    if (res.status == '401') {
+        return logoutInAction();
+    }
+
+    store.dispatch(addMessage(`Password Change Succesfully`));
+
     return 1;
 
 }
@@ -53,7 +62,7 @@ export default function Profile() {
                 </div>
 
             );
-        };
+        }
     });
     return (
         <>

@@ -2,6 +2,7 @@
 import {
     Link,
     useLoaderData,
+    redirect,
 
 } from "react-router-dom"
 import { useSelector } from "react-redux";
@@ -10,16 +11,23 @@ import { useSelector } from "react-redux";
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
 import { get } from "../helper functions/helperFunctions";
+import { logoutInAction } from "../components/Auth";
+
 
 // spinner should work test it out when apis are made
 export async function loader() {
 
     // make api call to get tickets here they com,e filtered show only
+    if (JSON.parse(localStorage.getItem('user')).user.type != "complaint") return redirect('/');
 
     const [req, error] = await get("/support/viewAcceptedTickets");
 
     if (error)
         throw error;
+    if (req.status == '401') {
+        return logoutInAction();
+    }
+
 
     const tickets = req.data;
 
@@ -58,7 +66,7 @@ export default function AcceptedTickets() {
     return (
         <>
             {/* <Header name={"Tickets"} searching={searching} q={q}  /> */}
-            <Header name={"Accepted Tickets"} allowSearch={false} />
+            <Header name={"Accepted Complaints"} allowSearch={false} />
 
 
             {/* make this a component */}
@@ -67,10 +75,10 @@ export default function AcceptedTickets() {
                 {tickets.length > 0 ? Items : <p className={className} style={
                     {
                         padding: "2rem",
-                        textAlign:"center",
+                        textAlign: "center",
 
                     }
-                }>No Accepted Tickets</p>}
+                }>No Accepted Complaints</p>}
 
             </div>
 

@@ -1,18 +1,24 @@
+/* eslint-disable react-refresh/only-export-components */
 import axios from 'axios';
 import "../styles/login.css";
 import signInlogo from "../assets/signInlogo.png"
 import {
     Form, redirect,
 } from "react-router-dom"
+
 import store from '../store';
 import { update } from '../features/auth/authSlice';
+import useToast from '../customHooks/useToast';
+import { addMessage } from '../features/messages/messagesSlice';
+
 // let baseUrl = 'http://172.27.134.146:3000';
 
 let baseUrl = 'https://rakmun-api.rakega.online'
 
 export async function action({ request }) {
     const data = Object.fromEntries(await request.formData());
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks, no-unused-vars
+    const { _ ,showErrorToast } = useToast();
     try {
         const res = await axios({
             method: 'post',
@@ -27,11 +33,11 @@ export async function action({ request }) {
         const user = JSON.stringify(res.data);
 
         localStorage.setItem("user", user);
-        store.dispatch(update())
+        store.dispatch(update());
+        store.dispatch(addMessage("Signed in Succesfully"));
 
     } catch (error) {
-        console.log(error);
-        alert(error.response.data.message);
+        showErrorToast(error.response.data.message)
         return redirect("/signin");
     }
 
@@ -46,7 +52,6 @@ export const instance = (token) => axios.create({
 })
 
 export default function SignIn() {
-
 
     return (
         <>

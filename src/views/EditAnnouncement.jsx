@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import Header from "../components/Header";
 import { get, post, put } from "../helper functions/helperFunctions";
 import {
@@ -9,8 +10,10 @@ import {
 } from "react-router-dom"
 
 import { useSelector } from "react-redux";
+import { logoutInAction } from "../components/Auth"
 
-
+import { addMessage } from '../features/messages/messagesSlice';
+import store from '../store';
 
 export async function loader({ params }) {
     // throw 1;
@@ -34,7 +37,7 @@ export async function loader({ params }) {
         throw error
     }
     if (announce.status == '401') {
-        return redirect('/signIn');
+        return logoutInAction();
     }
     else if (announce.status == '404') {
         announcement = [];
@@ -61,10 +64,12 @@ export async function action({ request }) {
         if (error)
             throw error;
         if (res.status == '401') {
-            return redirect('/signIn');
+            return logoutInAction();
         }
         else {
-            return redirect("/announcements?status=success");
+            store.dispatch(addMessage(`Annoucement Created Succesfully`));
+
+            return redirect("/announcements");
         }
     }
     else {
@@ -77,10 +82,11 @@ export async function action({ request }) {
         if (error)
             throw error;
         if (res.status == '401') {
-            return redirect('/signIn');
+            return logoutInAction();
         }
         else {
-            return redirect("/announcements?status=success")
+            store.dispatch(addMessage(`Annoucement Updated Succesfully`));
+            return redirect("/announcements")
         }
     }
 

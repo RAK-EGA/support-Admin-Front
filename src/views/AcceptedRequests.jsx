@@ -1,38 +1,34 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
     Link,
     useLoaderData,
-
+    redirect
 
 } from "react-router-dom"
 import { useSelector } from "react-redux";
 
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
-
+import { get } from "../helper functions/helperFunctions";
+import { logoutInAction } from "../components/Auth";
 // spinner should work test it out when apis are made
 export async function loader() {
 
     // make api call to get requests  here they com,e filtered show only
-    const createRequests = () => {
-        const reqs = []
-        for (let i = 1; i < 11; i++) {
-            const rand = Math.floor(Math.random() * 3) + 1
-            reqs.push(
-                {
-                    id: `${i}`,
-                    category: 'garbage',
-                    location: 'RAK',
-                    date: '18/12/2023',
-                    status: rand == 1 ? "opened" : rand == 2 ? "proccessing" : "closed",
-                    // add data here for tickets
-                },
+    // should change to accepted Permit BUT WHERE IS IT
+    if (JSON.parse(localStorage.getItem('user')).user.type != "permit") return redirect('/');
 
-            );
+    const [req, error] = await get("/support/viewAcceptedPermits");
 
-        }
-        return reqs;
-    };
-    const requests = createRequests();
+    if (error)
+        throw error;
+    if (req.status == '401') {
+        return logoutInAction();
+    }
+
+
+
+    const requests = req.data;
     return { requests };
 }
 
@@ -48,8 +44,8 @@ export default function Requests() {
         return (
 
             <Link
-                to={`${request.id}`}
-                key={request.id}
+                to={`${request._id}`}
+                key={request._id}
 
             >
                 <ListItem item={request} />
@@ -64,12 +60,17 @@ export default function Requests() {
     return (
 
         <>
-            <Header name={"Accepted Requests"} allowSearch={false} />
+            <Header name={"Accepted Permits"} allowSearch={false} />
 
 
             <div className={`display--elements ${className}`}>
-                {Items}
+                {requests.length > 0 ? Items : <p className={className} style={
+                    {
+                        padding: "2rem",
+                        textAlign: "center",
 
+                    }
+                }>No Accepted Permits</p>}
             </div>
 
 

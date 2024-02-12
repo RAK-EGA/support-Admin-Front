@@ -2,7 +2,7 @@
 import {
     Link,
     useLoaderData,
-
+    redirect,
 
 } from "react-router-dom"
 import { useSelector } from "react-redux";
@@ -11,42 +11,26 @@ import { useSelector } from "react-redux";
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
 import { get } from "../helper functions/helperFunctions";
+import { logoutInAction } from "../components/Auth"
 
 // spinner should work test it out when apis are made
 export async function loader() {
 
 
 
-    // const createTickets = () => {
-    //     const reqs = []
-    //     for (let i = 1; i < 11; i++) {
-
-    //         const rand = Math.floor(Math.random() * 3) + 1
-
-    //         reqs.push(
-    //             {
-    //                 id: `${i}`,
-    //                 category: 'garbage',
-    //                 location: 'RAK',
-    //                 date: '18/12/2023',
-    //                 status: rand == 1 ? "opened" : rand == 2 ? "proccessing" : "closed",
-    //                 // add data here for tickets
-    //             },
-    //         );
-    //     }
-    // //     return reqs;
-    // // };
-
     // make api call to get tickets here they com,e filtered show only
     // /support/viewAssignedTickets
+    if (JSON.parse(localStorage.getItem('user')).user.type != "complaint") return redirect('/');
 
     const [req, error] = await get("/support/viewAssignedTickets");
 
     if (error)
         throw error;
+    if (req.status == '401') {
+        return logoutInAction();
+    }
 
     const tickets = req.data;
-
     return { tickets };
 }
 
@@ -91,13 +75,19 @@ export default function Tickets() {
     return (
         <>
             {/* <Header name={"Tickets"} searching={searching} q={q}  /> */}
-            <Header name={"Unviewed Tickets"} allowSearch={false} />
+            <Header name={"Unviewed Complaints"} allowSearch={false} />
 
 
             {/* make this a component */}
             <div className={`display--elements ${className}`}>
                 {/* map to tickets here with a component  */}
-                {Items}
+                {tickets.length > 0 ? Items : <p className={className} style={
+                    {
+                        padding: "2rem",
+                        textAlign: "center",
+
+                    }
+                }>No Unviewed Complaints</p>}
 
             </div>
 

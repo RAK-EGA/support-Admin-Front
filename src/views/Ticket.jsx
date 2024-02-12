@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
     Form,
     useLoaderData,
@@ -10,32 +11,63 @@ import useModal from "../customHooks/useModal";
 import imgIcon from "../assets/imgIcon.png";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
-import { get } from "../helper functions/helperFunctions";
+import { put, get, post } from "../helper functions/helperFunctions";
+import { logoutInAction } from "../components/Auth"
+import { addMessage } from '../features/messages/messagesSlice';
+import store from '../store';
+
+
 
 // spinner should work test it out when apis are made
 export async function loader({ params }) {
-    // make api call to get tickets here they com,e filtered show only
-    // const ticket = await getTicket(.ticketIdparams);
-    // const ticket =
-    // {
-    //     id: '1',
-    //     category: 'garbage',
-    //     location: 'RAK',
-    //     issueDate: '18/12/2023',
-    //     status: "OPEN",
 
-
-    //     Attachments: ["https://www.epicnonsense.com/wp-content/uploads/2013/05/d153805f768c94a3006d630caab0e178.jpg", "https://www.pio.gov.cy/coronavirus/uploads/Lorem_ipsum.pdf", "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"],
-    //     // add data here for tickets
     // }
-    const [req, error] = await get("/support/viewTicket/", params.ticketId);
+    if (JSON.parse(localStorage.getItem('user')).user.type != "complaint") return redirect('/');
 
+    const [res, error] = await get("/support/viewTicket/", params.ticketId);
+    // use ticket to call for urls
+    // /documents/document/generate-urls
+    // post body 
+    // {
+    // images: ['name']
+    // }
     if (error)
         throw error;
+    if (res.status == '401') {
+        return logoutInAction();
+    }
 
-    const ticket = req.data;
+
+
+
+    const attachmentPromises = res.data["additional_fields"].map(async (field) => {
+        if (field.field_name === 'Attachments') {
+            const [res, error] = await post('/documents/document/generate-urls', {
+                images: [field.value],
+            })
+
+            if (error)
+                throw error;
+            if (res.status == '401') {
+                return logoutInAction();
+            }
+            field.value = res.data.generatedURLs[0];
+        }
+
+        return field
+    });
+
+    await Promise.all(attachmentPromises);
+    const ticket = res.data;
 
     return { ticket };
+
+    // use ticket to call for urls
+    // /documents/document/generate-urls
+    // post body 
+    // {
+    // images: ['name']
+    // }
 }
 
 
@@ -45,14 +77,19 @@ export async function action({ request, }) {
     // call endpoint to change status rediret to same page
     const data = Object.fromEntries(await request.formData());
 
+    const choice = { choice: data.choice }
 
-    // return updateContact(params.contactId, {
-    //     favorite: formData.get("favorite") === "true",
-    // });
-    console.log(data);
-    console.log("trust me I submited");
-    // return redirect(`/tickets/${ticket.id}`);
-    return redirect(`/tickets/${data.id}`);
+    const [res, error] = await put(`/support/acceptRejectTicket/${data.id}`, choice);
+
+    if (error)
+        throw error;
+    if (res.status == '401') {
+        return logoutInAction();
+    }
+    const f = data.choice=='accept'?"Accepted":"Rejected"
+    store.dispatch(addMessage(`Ticket ${f} Succesfully`));
+
+    return redirect(`/tickets`);
 }
 
 
@@ -66,28 +103,21 @@ export default function Ticket() {
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--primary light--gray" : "";
 
-    // const submit = useSubmit();
 
     let keys = [];
     for (let key in ticket) {
         keys.push(key);
     }
-    const info = keys.map((key) => {
-        if (key != '_id' && key != 'additional_fields' && key != '__v') {
+
+    const info = keys.map((key, _, i) => {
+        if (key != '_id' && key != 'additional_fields' && key != '__v' && key != 'assignedTo') {
             return (
-                <span className={className} key={key}>{key}: {ticket[key].toString()}</span>
+                <span className={className} key={key + i}>{key}: {ticket[key].toString()}</span>
             );
         }
     });
 
 
-    // {
-    //     "field_name": "Attachments",
-    //     "field_type": "image",
-    //     "value": "erer",
-    //     "is_required": false,
-    //     "is_ai_compatible": false
-    // }
     const fields = additional_fields.filter((obj) => {
         if (obj.field_name === 'Attachments') {
             return false
@@ -95,9 +125,9 @@ export default function Ticket() {
         return true
     });
 
-    const fieldsInfo = fields.map((key) => {
+    const fieldsInfo = fields.map((key, _, i) => {
         return (
-            <span className={className} key={key.value}>{key.field_name}: {key.value.toString()}</span>
+            <span className={className} key={key.value + i + key.field_name}>{key.field_name}: {key.value.toString()}</span>
         );
 
     });
@@ -113,13 +143,13 @@ export default function Ticket() {
     // maybe use fetcherform
 
 
-    const Attachments = (fieldsAttachments.length) > 0 ? fieldsAttachments.map((attachment) => {
+    const Attachments = (fieldsAttachments.length) > 0 ? fieldsAttachments.map((attachment, _, i) => {
 
         const fileName = attachment.value;
         const type = attachment.field_type;
         return (
             // <a href={a} key={a} target={`attachment${a}`}>
-            <div key={attachment.value}
+            <div key={fileName + i + type}
             >
                 <div
                     className="attachment"
@@ -129,7 +159,7 @@ export default function Ticket() {
                     }}
                 >
                     <img src={imgIcon} alt="documentIcon" />
-                    <span>{`${type}, ${fileName}`}</span>
+                    <span>{`${type}`}</span>
 
 
                 </div>
@@ -185,21 +215,44 @@ export default function Ticket() {
                     <div className="buttons--holder">
 
                         <Form method="post">
-                            <input type="text" hidden name="handle" value="reject" readOnly></input>
+                            <input type="text" hidden name="choice" value="reject" readOnly></input>
                             <input type="text" hidden readOnly value={ticket._id} name="id"></input>
 
                             <button className="button">Reject</button>
                         </Form>
+                        <Form method="post">
+                            <input type="text" hidden name="choice" value="accept" readOnly></input>
+                            <input type="text" hidden readOnly value={ticket._id} name="id"></input>
+
+                            <button className="button">Accept</button>
+                        </Form>
+
+                    </div>
+                }
+                {
+                    ticket.status === "VIEWED_BY_STAFF" &&
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        alignItems: 'center',
+                        marginBottom: '1rem',
+                    }}>
                         <button className="button"
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignContent: 'center',
+                                alignItems: 'center',
+                            }}
                             onClick={
                                 () => {
                                     setInfo("Accept", ticket._id);
                                     toggle();
                                 }
                             }
-                        >Accept</button>
+                        >Dispatch</button>
                     </div>
-
                 }
             </div>
 

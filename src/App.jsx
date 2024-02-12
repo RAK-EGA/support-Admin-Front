@@ -75,7 +75,15 @@ import EditAnnouncement, {
 import Profile, {
   action as editProfileAction,
 } from "./views/Profile";
+import Notifications, {
+  loader as notificationsLoader
+} from "./views/Notifications";
 import Auth from "./components/Auth";
+import { ToastContainer, } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
 
 
 const router = createBrowserRouter(
@@ -102,7 +110,7 @@ const router = createBrowserRouter(
               action={ticketAction}
             />
             <Route
-              path="tickets/:ticketId/dispatch"
+              path="AcceptedTickets/:ticketId/dispatch"
               action={dispatchAction}
             />
             <Route
@@ -149,7 +157,7 @@ const router = createBrowserRouter(
               action={requestAction}
             />
             <Route
-              path="requests/:requestId/dispatch"
+              path="AcceptedRequests/:requestId/dispatch"
               action={dispatchRequestAction}
             />
             <Route
@@ -176,6 +184,10 @@ const router = createBrowserRouter(
               loader={requestLoader}
               action={requestAction}
             />
+            <Route
+              path="RequestsHistory/:requestId/dispatch"
+              action={dispatchRequestAction}
+            />
 
             <Route
               path="announcements/"
@@ -188,6 +200,7 @@ const router = createBrowserRouter(
               path="announcements/delete"
               action={deleteAnnouncementsAction}
             />
+
             {/* moved responsibility to Admin/Service domain */}
             {/* <Route
             path="users/"
@@ -210,6 +223,11 @@ const router = createBrowserRouter(
               element={<Profile />}
               action={editProfileAction}
             // loader={editAnnouncementLoader}
+            />
+            <Route
+              path="notifications/"
+              element={<Notifications />}
+              loader={notificationsLoader}
             />
 
 
@@ -234,7 +252,11 @@ const router = createBrowserRouter(
 function App() {
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </>
+
   );
 }
 

@@ -3,44 +3,89 @@ import {
     Link,
     useLoaderData,
     useNavigation,
-
+    redirect,
 } from "react-router-dom"
 import { useSelector } from "react-redux";
+import { logoutInAction } from "../components/Auth"
 
 
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
 import { useEffect } from "react";
+import { get } from "../helper functions/helperFunctions";
 
 // spinner should work test it out when apis are made
 export async function loader({ request }) {
+    if (JSON.parse(localStorage.getItem('user')).user.type != "complaint") return redirect('/');
+
     const url = new URL(request.url);
-    const q = url.searchParams.get("Tickets History");
-    console.log(`here is your query I will filter the tickets with it eventually I promise
-    q = ${q}`);
+    const q = url.searchParams.get("Complaints History");
+
     // make api call to get tickets here they com,e filtered show only
 
-    const createTickets = () => {
-        const reqs = []
-        for (let i = 1; i < 11; i++) {
+    const regex = /^[A-Za-z\u0600-\u06FF0-9 ]*$/;
 
-            const rand = Math.floor(Math.random() * 3) + 1
+    const isValid = regex.test(q);
+    // leave q alone end
 
-            reqs.push(
-                {
-                    id: `${i}`,
-                    category: 'garbage',
-                    location: 'RAK',
-                    date: '18/12/2023',
-                    status: rand == 1 ? "opened" : rand == 2 ? "proccessing" : "closed",
-                    // add data here for tickets
-                },
-            );
+
+
+    // make api call to get tickets here they com,e filtered show only
+    let tickets = [];
+
+    // del me and use helper functions to do get requests
+
+
+    const data = q ? (isValid ? q : "") : "";
+
+
+    const mess = isValid ? null :
+        <>
+            <p>invalid characters used.</p>
+            <p>Please only use english,arabic letters and numbers.</p>
+        </>
+
+    if (data == "" || data == null) {
+        const [res, error] = await get("/support/viewcomplaintshistory");
+        if (error)
+            throw error;
+        if (res.status == '401') {
+            return logoutInAction();
         }
-        return reqs;
-    };
-    const tickets = createTickets();
-    return { q, tickets };
+        else if (res.status == '404') {
+            tickets = [];
+        }
+        else {
+            tickets = res.data;
+        }
+
+
+        const status = url.searchParams.get("status");
+
+
+
+        return { q, tickets, mess, status };
+    }
+    const [res, error] = await get("/support/filterTickets/", data);
+
+    if (error)
+        throw error;
+    if (res.status == '401') {
+        return logoutInAction();
+    }
+    else if (res.status == '404') {
+        tickets = [];
+    }
+    else {
+        tickets = res.data;
+    }
+
+
+    const status = url.searchParams.get("status");
+
+
+
+    return { q, tickets, mess, status };
 }
 
 
@@ -54,7 +99,8 @@ export async function loader({ request }) {
 
 export default function Tickets() {
 
-    const { q, tickets } = useLoaderData();
+    const { q, tickets, mess, status } = useLoaderData();
+
     const navigation = useNavigation();
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--primary light--gray" : "";
@@ -75,23 +121,28 @@ export default function Tickets() {
     const searching =
         navigation.location &&
         new URLSearchParams(navigation.location.search).has(
-            "Tickets History"
+            "Complaints History"
         );
 
     useEffect(() => {
-        document.getElementById("Tickets History").value = q;
+        document.getElementById("Complaints History").value = q;
     }, [q]);
 
     return (
         <>
-            <Header name={"Tickets History"} searching={searching} q={q} />
+            <Header name={"Complaints History"} searching={searching} q={q} mess={mess} />
 
 
             {/* make this a component */}
             <div className={`display--elements ${className}`}>
                 {/* map to tickets here with a component  */}
-                {Items}
+                {tickets.length > 0 ? Items : <p className={className} style={
+                    {
+                        padding: "2rem",
+                        textAlign: "center",
 
+                    }
+                }>No Complaints Found</p>}
             </div>
 
 

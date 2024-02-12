@@ -1,42 +1,85 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
     Link,
     useLoaderData,
     useNavigation,
+    redirect
 } from "react-router-dom"
 import { useSelector } from "react-redux";
-
+import { get } from "../helper functions/helperFunctions";
 import ListItem from "../components/ListItem";
 import Header from "../components/Header";
 import { useEffect } from "react";
+import { logoutInAction } from "../components/Auth"
 
 // spinner should work test it out when apis are made
 export async function loader({ request }) {
+
+    if (JSON.parse(localStorage.getItem('user')).user.type != "permit") return redirect('/');
+
     const url = new URL(request.url);
-    const q = url.searchParams.get("Requests History");
-    console.log(`here is your query I will filter the Requests with it eventually I promise
-    q = ${q}`);
+    const q = url.searchParams.get("Permits History");
+
     // make api call to get requests  here they com,e filtered show only
-    const createRequests = () => {
-        const reqs = []
-        for (let i = 1; i < 11; i++) {
-            const rand = Math.floor(Math.random() * 3) + 1
-            reqs.push(
-                {
-                    id: `${i}`,
-                    category: 'garbage',
-                    location: 'RAK',
-                    date: '18/12/2023',
-                    status: rand == 1 ? "opened" : rand == 2 ? "proccessing" : "closed",
-                    // add data here for tickets
-                },
+    const regex = /^[A-Za-z\u0600-\u06FF0-9 ]*$/;
 
-            );
+    const isValid = regex.test(q);
+    // leave q alone end
 
+
+
+    // make api call to get tickets here they com,e filtered show only
+    let requests = [];
+
+    // del me and use helper functions to do get requests
+
+
+    const data = q ? (isValid ? q : "") : "";
+
+
+    const mess = isValid ? null :
+        <>
+            <p>invalid characters used.</p>
+            <p>Please only use english,arabic letters and numbers.</p>
+        </>
+
+    if (data == "" || data == null) {
+        const [res, error] = await get("/support/viewPermitsHistory");
+        if (error)
+            throw error;
+        if (res.status == '401') {
+            return logoutInAction();
         }
-        return reqs;
-    };
-    const requests = createRequests();
-    return { q, requests };
+        else if (res.status == '404') {
+            requests = [];
+        }
+        else {
+            requests = res.data;
+        }
+
+
+        const status = url.searchParams.get("status");
+
+
+        return { q, requests, mess, status };
+    }
+    const [res, error] = await get("/support/filterPermits/", data);
+
+    if (error)
+        throw error;
+    if (res.status == '401') {
+        return logoutInAction();
+    }
+    else if (res.status == '404') {
+        requests = [];
+    }
+    else {
+        requests = res.data;
+    }
+
+
+
+    return { q, requests, mess };
 }
 
 
@@ -44,11 +87,13 @@ export async function loader({ request }) {
 //     const contact = await createContact();
 //     return redirect(`/contacts/${contact.id}/edit`);
 // }
+// [
 
 
 
 export default function Requests() {
-    const { q, requests } = useLoaderData();
+    const { q, requests, mess } = useLoaderData();
+
     const navigation = useNavigation();
     const isDarkmode = useSelector((state) => state.darkmode.value);
     const className = isDarkmode ? "dark--primary light--gray" : "";
@@ -56,8 +101,8 @@ export default function Requests() {
         return (
 
             <Link
-                to={`${request.id}`}
-                key={request.id}
+                to={`${request._id}`}
+                key={request._id}
 
             >
                 <ListItem item={request} />
@@ -70,21 +115,27 @@ export default function Requests() {
     const searching =
         navigation.location &&
         new URLSearchParams(navigation.location.search).has(
-            "Requests History"
+            "Permits History"
         );
 
     useEffect(() => {
-        document.getElementById("Requests History").value = q;
+        document.getElementById("Permits History").value = q;
     }, [q]);
 
     return (
 
         <>
-            <Header name={"Requests History"} searching={searching} q={q} />
+            <Header name={"Permits History"} searching={searching} q={q} mess={mess} />
 
 
             <div className={`display--elements ${className}`}>
-                {Items}
+                {requests.length > 0 ? Items : <p className={className} style={
+                    {
+                        padding: "2rem",
+                        textAlign: "center",
+
+                    }
+                }>No Permits Found</p>}
 
             </div>
 
